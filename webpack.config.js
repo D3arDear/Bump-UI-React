@@ -2,9 +2,12 @@ const path = require("path");
 // 由于需要绝对路径所以用这个 path
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
-  mode: "production",
+  mode: "development",
   entry: {
     bui: "./lib/index.tsx"
+  },
+  resolve: {
+    extensions: [".ts", ".tsx", ".js", ".jsx"]
   },
   output: {
     // 输出到哪
@@ -25,5 +28,19 @@ module.exports = {
       title: "BUI",
       template: "index.html"
     })
-  ]
+  ],
+  externals: {
+    react: {
+      commonjs: "react",
+      commonjs2: "react",
+      amd: "react",
+      root: "React"
+    },
+    "react-dom": {
+      commonjs: "react-dom",
+      commonjs2: "react-dom",
+      amd: "react-dom",
+      root: "ReactDOM"
+    }
+  }
 };
