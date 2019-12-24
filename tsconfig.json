@@ -16,7 +16,9 @@
     "noImplicitAny": true,
     "importHelpers": true,
     "strictNullChecks": true,
-    "allowSyntheticDefaultImports": true,
+    // "allowSyntheticDefaultImports": true,
+    // 这里为了解决jest的问题所以有了下面这行,注释了上面那行
+    "esModuleInterop": true,
     "noUnusedLocals": true
   },
   "include": [],
