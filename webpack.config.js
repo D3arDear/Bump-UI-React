@@ -12,7 +12,7 @@ module.exports = {
 	output: {
 		// 输出到哪
 		path: path.resolve(__dirname, "dist/lib"),
-		library: "BUI",
+		library: "bui",
 		libraryTarget: "umd",
 	},
 	module: {
@@ -24,6 +24,14 @@ module.exports = {
 			{
 				test: /\.svg$/,
 				loader: "svg-sprite-loader",
+			},
+			{
+				test: /\.s([ac])ss$/,
+				use: [
+					"style-loader", // 把 对象 变成一个 style 标签
+					"css-loader", // 把 css 字符串 变成一个对象
+					"sass-loader", // 以字符串的形式把 scss 变成 css
+				],
 			},
 		],
 	},
