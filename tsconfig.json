@@ -21,7 +21,7 @@
 		"esModuleInterop": true,
 		"noUnusedLocals": true
 	},
-	"include": ["lib/**/*"],
+	"include": ["lib/**/*", "test/__mocks__"],
 	"exclude": [
 		"node_modules",
 		"build",
