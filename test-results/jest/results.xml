@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="9" failures="0" time="6.034">
-  <testsuite name="第一个测试用例" errors="0" failures="0" skipped="0" timestamp="2020-01-03T13:48:05" time="2.605" tests="1">
-    <testcase classname="第一个测试用例 add(1,2) 等于 3" name="第一个测试用例 add(1,2) 等于 3" time="0.003">
+<testsuites name="jest tests" tests="9" failures="0" time="8.117">
+  <testsuite name="第一个测试用例" errors="0" failures="0" skipped="0" timestamp="2020-01-03T21:53:17" time="2.568" tests="1">
+    <testcase classname="第一个测试用例 add(1,2) 等于 3" name="第一个测试用例 add(1,2) 等于 3" time="0.004">
     </testcase>
   </testsuite>
-  <testsuite name="button tests" errors="0" failures="0" skipped="0" timestamp="2020-01-03T13:48:05" time="2.66" tests="1">
-    <testcase classname="button tests 是个 div" name="button tests 是个 div" time="0.009">
+  <testsuite name="button tests" errors="0" failures="0" skipped="0" timestamp="2020-01-03T21:53:17" time="3.357" tests="1">
+    <testcase classname="button tests 是个 div" name="button tests 是个 div" time="0.012">
     </testcase>
   </testsuite>
-  <testsuite name="classes" errors="0" failures="0" skipped="0" timestamp="2020-01-03T13:48:05" time="2.7" tests="5">
+  <testsuite name="classes" errors="0" failures="0" skipped="0" timestamp="2020-01-03T21:53:17" time="3.704" tests="5">
     <testcase classname="classes 接受一个 className" name="classes 接受一个 className" time="0.002">
     </testcase>
     <testcase classname="classes 接受两个 className" name="classes 接受两个 className" time="0">
     </testcase>
-    <testcase classname="classes 接受一个 undefine 一个 className" name="classes 接受一个 undefine 一个 className" time="0">
+    <testcase classname="classes 接受一个 undefine 一个 className" name="classes 接受一个 undefine 一个 className" time="0.001">
     </testcase>
-    <testcase classname="classes 接受很多个奇奇怪怪的值" name="classes 接受很多个奇奇怪怪的值" time="0.001">
+    <testcase classname="classes 接受很多个奇奇怪怪的值" name="classes 接受很多个奇奇怪怪的值" time="0">
     </testcase>
     <testcase classname="classes 什么都不给 (0个参数)" name="classes 什么都不给 (0个参数)" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="icon tests" errors="0" failures="0" skipped="0" timestamp="2020-01-03T13:48:05" time="2.78" tests="2">
+  <testsuite name="icon tests" errors="0" failures="0" skipped="0" timestamp="2020-01-03T21:53:17" time="3.783" tests="2">
     <testcase classname="icon tests render successfully" name="icon tests render successfully" time="0.01">
     </testcase>
-    <testcase classname="icon tests onClick" name="icon tests onClick" time="0.026">
+    <testcase classname="icon tests onClick" name="icon tests onClick" time="0.025">
     </testcase>
   </testsuite>
 </testsuites>
