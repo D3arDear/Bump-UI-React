@@ -1,17 +1,17 @@
 module.exports = {
 	verbose: true,
 	clearMocks: false,
-  reporters: ["default"],
-  
+	reporters: ["default", "jest-junit"],
+
 	collectCoverage: true,
 	collectCoverageFrom: ["{lib,include}/**/*.{js,jsx,ts,tsx}", "!**/node_modules/**"],
 	coverageDirectory: "coverage",
 	coverageReporters: ["text", "lcov"],
-	// globals: {
-	// 	"ts-jest": {
-	// 		tsConfig: "tsconfig.test.json",
-	// 	},
-	// },
+	globals: {
+		"ts-jest": {
+			tsConfig: "tsconfig.test.json",
+		},
+	},
 	moduleFileExtensions: ["js", "jsx", "ts", "tsx"],
 	moduleDirectories: ["node_modules", "include"],
 	moduleNameMapper: {
