@@ -60,5 +60,31 @@ const alert = (content: string) => {
 	document.body.append(div)
 	ReactDOM.render(component, div)
 }
-export { alert }
+const confirm = (content: string, yes?: () => void, no?: () => void) => {
+	const onYes = () => {
+		ReactDOM.render(React.cloneElement(component, { visible: false }), div)
+		ReactDOM.unmountComponentAtNode(div)
+		div.remove()
+		yes && yes()
+	}
+	const onNo = () => {
+		ReactDOM.render(React.cloneElement(component, { visible: false }), div)
+		ReactDOM.unmountComponentAtNode(div)
+		div.remove()
+		no && no()
+	}
+	const component = (
+		<Dialog
+			visible={true}
+			onClose={onNo}
+			buttons={[<button onClick={onYes}>Yes</button>, <button onClick={onNo}>No</button>]}
+		>
+			{content}
+		</Dialog>
+	)
+	const div = document.createElement("div")
+	document.body.appendChild(div)
+	ReactDOM.render(component, div)
+}
+export { alert, confirm }
 export default Dialog
