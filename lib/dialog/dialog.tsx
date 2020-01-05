@@ -2,6 +2,8 @@ import React, { ReactElement, Fragment } from "react"
 import "./dialog.scss"
 import { Icon } from "../index"
 import { scopeClassMaker } from "../classes"
+import ReactDOM from "react-dom"
+
 interface Props {
 	visible: boolean
 	buttons: Array<ReactElement>
@@ -19,7 +21,7 @@ const Dialog: React.FunctionComponent<Props> = (props) => {
 	const onClickMask: React.MouseEventHandler = (e) => {
 		props.closeOnClickMask && props.onClose(e)
 	}
-	return props.visible ? (
+	const x = props.visible ? (
 		<Fragment>
 			<div className={sc("mask")} onClick={onClickMask}></div>
 			<div className={sc()}>
@@ -34,6 +36,7 @@ const Dialog: React.FunctionComponent<Props> = (props) => {
 			</div>
 		</Fragment>
 	) : null
+	return ReactDOM.createPortal(x, document.body)
 }
 
 Dialog.defaultProps = {
