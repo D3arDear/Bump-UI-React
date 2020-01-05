@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import Dialog from "./dialog"
+import Dialog, { alert } from "./dialog"
 
 const DialogExample = () => {
 	const [x, setX] = useState(false)
@@ -34,6 +34,10 @@ const DialogExample = () => {
 				>
 					<strong>hi</strong>
 				</Dialog>
+			</div>
+			<div>
+				<h2>Useing Dialog pass an alert directive</h2>
+				<button onClick={() => alert("1")}>alert</button>
 			</div>
 		</div>
 	)

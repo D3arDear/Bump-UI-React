@@ -6,6 +6,14 @@
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 		<title><%= htmlWebpackPlugin.options.title %></title>
 	</head>
+	<style>
+		.bui-dialog {
+			z-index: 100;
+		}
+		.bui-dialog__mask {
+			z-index: 99;
+		}
+	</style>
 	<body>
 		<div id="root"></div>
 	</body>
