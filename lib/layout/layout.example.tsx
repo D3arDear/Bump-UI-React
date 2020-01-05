@@ -12,44 +12,44 @@ export default function() {
 			<div>
 				<h2>First example</h2>
 				<Layout className="hi" style={{ height: "200px" }}>
-					<Header className="edge"></Header>
-					<Content className="c"></Content>
-					<Footer className="edge"></Footer>
+					<Header className="edge">Header</Header>
+					<Content className="c">Content</Content>
+					<Footer className="edge">Footer</Footer>
 				</Layout>
 			</div>
 			<div>
 				<h2>Second example</h2>
 				<p>Layout wrapped by layout with aside left</p>
 				<Layout className="hi" style={{ height: "200px" }}>
-					<Header className="edge"></Header>
+					<Header className="edge">Header</Header>
 					<Layout>
-						<Aside className="side"></Aside>
-						<Content className="c"></Content>
+						<Aside className="side">Aside</Aside>
+						<Content className="c">Content</Content>
 					</Layout>
-					<Footer className="edge"></Footer>
+					<Footer className="edge">Footer</Footer>
 				</Layout>
 			</div>
 			<div>
 				<h2>Third example</h2>
 				<p>Layout wrapped by layout with aside right</p>
 				<Layout className="hi" style={{ height: "200px" }}>
-					<Header className="edge"></Header>
+					<Header className="edge">Header</Header>
 					<Layout>
-						<Content className="c"></Content>
-						<Aside className="side"></Aside>
+						<Content className="c">Content</Content>
+						<Aside className="side">Aside</Aside>
 					</Layout>
-					<Footer className="edge"></Footer>
+					<Footer className="edge">Footer</Footer>
 				</Layout>
 			</div>
 			<div>
 				<h2>Forth example</h2>
 				<p>HCF inside of Layout and wrapped by Layout with Aside</p>
 				<Layout className="hi" style={{ height: "200px" }}>
-					<Aside className="side"></Aside>
+					<Aside className="side">Aside</Aside>
 					<Layout>
-						<Header className="edge"></Header>
-						<Content className="c"></Content>
-						<Footer className="edge"></Footer>
+						<Header className="edge">Header</Header>
+						<Content className="c">Content</Content>
+						<Footer className="edge">Footer</Footer>
 					</Layout>
 				</Layout>
 			</div>
