@@ -3,7 +3,7 @@
 	border: 1px solid red;
 	display: flex;
 	flex-direction: column;
-	&__content {
+	&-content {
 		flex-grow: 1;
 		border: 1px dotted green;
 	}
@@ -13,7 +13,7 @@
 		flex-direction: row;
 	}
 }
-.bui-layout--hasAside {
+.bui-layout-hasAside {
 	flex-direction: row;
 	.bui-layout {
 		flex-direction: column;

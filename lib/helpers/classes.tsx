@@ -11,29 +11,15 @@ interface ClassTriggers {
 	[Key: string]: boolean;
 }
 function scopeClassMaker(prefix: string) {
-	return function(name?: string | ClassTriggers, options?: Options) {
-		let name2;
-		let result = [prefix, name].filter(Boolean).join("__");
-		if (typeof name === "string" || name === undefined) {
-			name2 = name;
-		} else {
-			name2 = Object.entries(name)
-				.filter((kv) => kv[1])
-				.map((kv) => kv[0]);
-			console.log("name2 ", name2);
-			result = name2
-				.map((n) => {
-					return [prefix, n].filter(Boolean).join("--");
-				})
-				.join(" ");
-			console.log("result ", result);
-		}
-		if (options && options.extra) {
-			return [result, options && options.extra].filter(Boolean).join(" ");
-		} else {
-			return result;
-		}
-	};
+	return (name: string | ClassTriggers, options?: Options) =>
+		Object.entries(name instanceof Object ? name : { [name]: name })
+			.filter((kv) => kv[1] !== false)
+			.map((kv) => kv[0])
+			.map((name) => {
+				return [prefix, name].filter(Boolean).join("-");
+			})
+			.concat((options && options.extra) || [])
+			.join(" ");
 }
 
 export { scopeClassMaker };
