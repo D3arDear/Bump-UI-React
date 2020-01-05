@@ -1,9 +1,15 @@
 import React from "react";
 import { scopeClassMaker } from "../classes";
 const sc = scopeClassMaker("bui-layout");
+interface Props extends React.HTMLAttributes<HTMLElement> {}
 
-const Content = () => {
-	return <div className={sc("content")}>Content</div>;
+const Content: React.FunctionComponent<Props> = (props) => {
+	const { className, ...rest } = props;
+	return (
+		<div className={sc("content", { extra: className })} {...rest}>
+			Content
+		</div>
+	);
 };
 
 export default Content;

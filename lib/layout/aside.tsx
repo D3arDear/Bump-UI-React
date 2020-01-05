@@ -1,7 +1,15 @@
-import React from "react"
+import React from "react";
+import { scopeClassMaker } from "../classes";
+const sc = scopeClassMaker("bui-layout");
+interface Props extends React.HTMLAttributes<HTMLElement> {}
 
-const Aside = () => {
-	return <div></div>
-}
+const Aside: React.FunctionComponent<Props> = (props) => {
+	const { className, ...rest } = props;
+	return (
+		<div className={sc("aside", { extra: className })} {...rest}>
+			Aside
+		</div>
+	);
+};
 
-export default Aside
+export default Aside;
