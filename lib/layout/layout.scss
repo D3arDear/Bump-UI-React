@@ -1,15 +1,12 @@
 @import "../helper";
 .bui-layout {
-	border: 1px solid red;
 	display: flex;
 	flex-direction: column;
 	&-content {
 		flex-grow: 1;
-		border: 1px dotted green;
 	}
 	& & {
 		flex-grow: 1;
-		border: 1px dotted blue;
 		flex-direction: row;
 	}
 }

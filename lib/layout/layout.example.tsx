@@ -4,7 +4,7 @@ import Header from "./header";
 import Content from "./content";
 import Footer from "./footer";
 import Aside from "./aside";
-// import Layout from "./layout"
+import "./layout.example.scss";
 
 export default function() {
 	return (
@@ -12,44 +12,44 @@ export default function() {
 			<div>
 				<h2>First example</h2>
 				<Layout className="hi" style={{ height: "200px" }}>
-					<Header></Header>
-					<Content></Content>
-					<Footer></Footer>
+					<Header className="edge"></Header>
+					<Content className="c"></Content>
+					<Footer className="edge"></Footer>
 				</Layout>
 			</div>
 			<div>
 				<h2>Second example</h2>
 				<p>Layout wrapped by layout with aside left</p>
 				<Layout className="hi" style={{ height: "200px" }}>
-					<Header></Header>
+					<Header className="edge"></Header>
 					<Layout>
-						<Aside></Aside>
-						<Content></Content>
+						<Aside className="side"></Aside>
+						<Content className="c"></Content>
 					</Layout>
-					<Footer></Footer>
+					<Footer className="edge"></Footer>
 				</Layout>
 			</div>
 			<div>
 				<h2>Third example</h2>
 				<p>Layout wrapped by layout with aside right</p>
 				<Layout className="hi" style={{ height: "200px" }}>
-					<Header></Header>
+					<Header className="edge"></Header>
 					<Layout>
-						<Content></Content>
-						<Aside></Aside>
+						<Content className="c"></Content>
+						<Aside className="side"></Aside>
 					</Layout>
-					<Footer></Footer>
+					<Footer className="edge"></Footer>
 				</Layout>
 			</div>
 			<div>
 				<h2>Forth example</h2>
 				<p>HCF inside of Layout and wrapped by Layout with Aside</p>
 				<Layout className="hi" style={{ height: "200px" }}>
-					<Aside></Aside>
+					<Aside className="side"></Aside>
 					<Layout>
-						<Header></Header>
-						<Content></Content>
-						<Footer></Footer>
+						<Header className="edge"></Header>
+						<Content className="c"></Content>
+						<Footer className="edge"></Footer>
 					</Layout>
 				</Layout>
 			</div>

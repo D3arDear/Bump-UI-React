@@ -1,0 +1,28 @@
+$baseBG: #ddd;
+.edge {
+	height: 40px;
+	background: $baseBG;
+	margin: 4px 0;
+	padding: 2px;
+	color: #ff7653;
+}
+.c {
+	color: #ff7653;
+	margin: 4px 0;
+	padding: 2px;
+	background: lighten($baseBG, 5%);
+}
+
+.side {
+	color: #ff7653;
+	min-width: 70px;
+	margin: 4px 0;
+	padding: 2px;
+	background: darken($baseBG, 5%);
+}
+
+.side + .c,
+.c + .side,
+.side + .bui-layout {
+	margin-left: 8px;
+}
