@@ -3,6 +3,12 @@
 	border: 1px solid red;
 	display: flex;
 	flex-direction: column;
+	&.hasAside {
+		flex-direction: row;
+		.bui-layout {
+			flex-direction: column;
+		}
+	}
 	&__content {
 		flex-grow: 1;
 		border: 1px dotted green;
