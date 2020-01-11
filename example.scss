@@ -1,19 +1,19 @@
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 *::before,
 *::after {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 ul,
 ol {
-	list-style: none;
+  list-style: none;
 }
 a {
-	text-decoration: none;
-	color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 h1,
 h2,
@@ -21,7 +21,11 @@ h3,
 h4,
 h5,
 h6 {
-	font-weight: normal;
+  font-weight: normal;
+}
+pre {
+  font-family: "Fira Code Medium", Consolas, monospace;
+  padding: 16px;
 }
 
 $padding: 16px;
@@ -30,69 +34,73 @@ $card-shadow: 0px 2px 2px rgba(0, 0, 0, 0.24), 0px 0px 2px rgba(0, 0, 0, 0.12);
 $main-color: #ff7653;
 
 .site-header {
-	background: #eee;
-	box-shadow: $card-shadow;
+  background: #eee;
+  box-shadow: $card-shadow;
 }
 .site-logo {
-	padding: 0 $padding;
-	display: flex;
-	align-items: center;
-	> svg {
-		height: 36px;
-		width: 36px;
-		fill: darken($main-color, 20%);
-	}
-	> span {
-		color: darken($main-color, 20%);
-		font-size: 30px;
-	}
+  padding: 0 $padding;
+  display: flex;
+  align-items: center;
+  > svg {
+    height: 36px;
+    width: 36px;
+    fill: darken($main-color, 20%);
+  }
+  > span {
+    color: darken($main-color, 20%);
+    font-size: 30px;
+  }
 }
 .site-page {
-	background: #f9f9f9;
+  background: #f9f9f9;
+  min-height: 100vh;
 }
 .site-main {
-	padding-top: 16px;
+  padding-top: 16px;
 }
 .site-aside {
-	box-shadow: $right-shadow;
-	margin-right: 16px;
-	h2 {
-		padding: $padding;
-		font-size: 18px;
-	}
-	ul {
-		min-width: 10em;
-		> li {
-			a {
-				transition: all 0.3s;
-				color: #444;
-				display: block;
-				padding: 8px $padding;
-				&:hover {
-					color: $main-color;
-				}
-				&.active {
-					color: white;
-					background: lighten(desaturate($main-color, 30%), 5%);
-					position: relative;
-					&::after {
-						content: "";
-						position: absolute;
-						right: 0;
-						top: 0;
-						bottom: 0;
-						width: 2px;
-						background: darken($main-color, 20%);
-					}
-				}
-			}
-		}
-	}
+  box-shadow: $right-shadow;
+  margin-right: 16px;
+  h2 {
+    padding: $padding;
+    font-size: 18px;
+  }
+  ul {
+    min-width: 10em;
+    > li {
+      a {
+        transition: all 0.3s;
+        color: #444;
+        display: block;
+        padding: 8px $padding;
+        &:hover {
+          color: $main-color;
+        }
+        &.active {
+          color: white;
+          background: lighten(desaturate($main-color, 30%), 5%);
+          position: relative;
+          &::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: darken($main-color, 20%);
+          }
+        }
+      }
+    }
+  }
 }
 .site-footer {
-	text-align: center;
-	font-size: 12px;
-	color: #666;
-	padding: 16px 0;
-	background: #eee;
+  text-align: center;
+  font-size: 12px;
+  color: #666;
+  padding: 16px 0;
+  background: #eee;
+}
+.example {
+  padding: 16px 0;
 }
