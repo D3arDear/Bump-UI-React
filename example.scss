@@ -61,12 +61,30 @@ $main-color: #ff7653;
 		font-size: 18px;
 	}
 	ul {
-		padding: 0 $padding;
 		min-width: 10em;
 		> li {
-			padding: 8px 0;
 			a {
-				color: $main-color;
+				transition: all 0.3s;
+				color: #444;
+				display: block;
+				padding: 8px $padding;
+				&:hover {
+					color: $main-color;
+				}
+				&.active {
+					color: white;
+					background: lighten(desaturate($main-color, 30%), 5%);
+					position: relative;
+					&::after {
+						content: "";
+						position: absolute;
+						right: 0;
+						top: 0;
+						bottom: 0;
+						width: 2px;
+						background: darken($main-color, 20%);
+					}
+				}
 			}
 		}
 	}

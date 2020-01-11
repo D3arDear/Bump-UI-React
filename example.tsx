@@ -4,7 +4,7 @@ import IconExample from "./lib/icon/icon.example";
 import ButtonExample from "./lib/button/button.example";
 import DialogExample from "./lib/dialog/dialog.example";
 import LayoutExample from "./lib/layout/layout.example";
-import { HashRouter as Router, Link, Route } from "react-router-dom";
+import { HashRouter as Router, NavLink, Route } from "react-router-dom";
 import { Layout, Header, Content, Footer, Aside } from "./lib/layout/layout";
 import "./example.scss";
 import { Icon } from "./lib";
@@ -23,16 +23,16 @@ ReactDom.render(
 					<h2>组件</h2>
 					<ul>
 						<li>
-							<Link to="/icon">Icon</Link>
+							<NavLink to="/icon">Icon</NavLink>
 						</li>
 						<li>
-							<Link to="/button">Button</Link>
+							<NavLink to="/button">Button</NavLink>
 						</li>
 						<li>
-							<Link to="/dialog">Dialog</Link>
+							<NavLink to="/dialog">Dialog</NavLink>
 						</li>
 						<li>
-							<Link to="/layout">Layout</Link>
+							<NavLink to="/layout">Layout</NavLink>
 						</li>
 					</ul>
 				</Aside>
