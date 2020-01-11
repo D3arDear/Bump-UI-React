@@ -1,6 +1,6 @@
-const path = require("path")
+const path = require("path");
 // 由于需要绝对路径所以用这个 path
-const HtmlWebpackPlugin = require("html-webpack-plugin")
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
 	// mode: "development",
 	entry: {
@@ -33,6 +33,10 @@ module.exports = {
 					"sass-loader", // 以字符串的形式把 scss 变成 css
 				],
 			},
+			{
+				test: /\.(png|jpg|jpeg|gif)$/,
+				use: ["file-loader"],
+			},
 		],
 	},
 	// plugins: [
@@ -55,4 +59,4 @@ module.exports = {
 	//     root: "ReactDOM"
 	//   }
 	// }
-}
+};
