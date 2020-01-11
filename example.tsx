@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDom from "react-dom";
-import IconExample from "./lib/icon/icon.example";
+import IconDemo from "./lib/icon/icon.demo";
 import ButtonExample from "./lib/button/button.example";
 import DialogExample from "./lib/dialog/dialog.example";
 import LayoutExample from "./lib/layout/layout.example";
@@ -37,7 +37,7 @@ ReactDom.render(
 					</ul>
 				</Aside>
 				<Content className="site-main">
-					<Route path="/icon" component={IconExample} />
+					<Route path="/icon" component={IconDemo} />
 					<Route path="/button" component={ButtonExample} />
 					<Route path="/dialog" component={DialogExample} />
 					<Route path="/layout" component={LayoutExample} />
