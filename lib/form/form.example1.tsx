@@ -11,6 +11,7 @@ export default function FormExample1() {
     { name: "username", label: "用户名", input: { type: "text" } },
     { name: "password", label: "密码", input: { type: "password" } },
   ]);
+  const [errors, setErrors] = useState({});
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     const rules = [
       { key: "username", required: true },
@@ -29,7 +30,7 @@ export default function FormExample1() {
       },
     ];
     const errors = Validator(formData, rules);
-    console.log(errors);
+    setErrors(errors);
   };
   return (
     <Fragment>
@@ -43,6 +44,7 @@ export default function FormExample1() {
             <button>返回</button>
           </Fragment>
         }
+        errors={errors}
         onSubmit={onSubmit}
         onChange={(newValue) => setFromData(newValue)}
       />
