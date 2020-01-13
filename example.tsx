@@ -4,6 +4,7 @@ import IconDemo from "./lib/icon/icon.demo";
 import ButtonExample from "./lib/button/button.example";
 import DialogDemo from "./lib/dialog/dialog.demo";
 import LayoutDemo from "./lib/layout/layout.demo";
+import FromDemo from "./lib/form/form.demo";
 import { HashRouter as Router, NavLink, Route } from "react-router-dom";
 import { Layout, Header, Content, Footer, Aside } from "./lib/layout/layout";
 import "./example.scss";
@@ -34,6 +35,9 @@ ReactDom.render(
             <li>
               <NavLink to="/layout">Layout</NavLink>
             </li>
+            <li>
+              <NavLink to="/form">Form</NavLink>
+            </li>
           </ul>
         </Aside>
         <Content className="site-main">
@@ -41,6 +45,7 @@ ReactDom.render(
           <Route path="/button" component={ButtonExample} />
           <Route path="/dialog" component={DialogDemo} />
           <Route path="/layout" component={LayoutDemo} />
+          <Route path="/form" component={FromDemo} />
         </Content>
       </Layout>
       <Footer className="site-footer">&copy; Brenz</Footer>
