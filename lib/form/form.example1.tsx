@@ -30,6 +30,7 @@ export default function FormExample1() {
       },
     ];
     const errors = Validator(formData, rules);
+    console.log(errors);
     setErrors(errors);
   };
   return (

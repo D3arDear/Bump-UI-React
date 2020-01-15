@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 *::before,
 *::after {
   box-sizing: border-box;
@@ -52,7 +53,7 @@ $main-color: #ff7653;
   }
 }
 .site-page {
-  background: #f9f9f9;
+  background: #fcfcfc;
   min-height: 100vh;
 }
 .site-main {
