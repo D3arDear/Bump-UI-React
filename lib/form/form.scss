@@ -1,14 +1,14 @@
 @import "../helper";
 
 .bui-form {
-  &-row {
-    margin-top: 16px;
-    margin-bottom: 16px;
+  &-td {
+    padding-top: 0;
+    padding-bottom: 32px;
   }
-  &:first-child {
-    margin-top: 0;
+  &-tr:last-child &-td {
+    padding-bottom: 0;
   }
-  &:last-child {
-    margin-bottom: 0;
+  &-tr + &-td {
+    padding-left: 16px;
   }
 }
