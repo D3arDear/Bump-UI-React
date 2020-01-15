@@ -28,22 +28,24 @@ const Form: React.FunctionComponent<Props> = (props) => {
   return (
     <form onSubmit={onSubmit} className={classes("bui-form")}>
       <table>
-        {props.fields.map((f) => (
-          <tr className={classes("bui-form-tr")} key={f.name}>
-            <td className="bui-form-td">
-              <Input
-                label={f.label}
-                type={f.input.type}
-                value={formData[f.name]}
-                onChange={(e) => onInputChange(f.name, e.target.value)}
-              />
-              <div>{props.errors[f.name]}</div>
-            </td>
+        <tbody>
+          {props.fields.map((f) => (
+            <tr className={classes("bui-form-tr")} key={f.name}>
+              <td className="bui-form-td">
+                <Input
+                  label={f.label}
+                  type={f.input.type}
+                  value={formData[f.name]}
+                  onChange={(e) => onInputChange(f.name, e.target.value)}
+                />
+                <div>{props.errors[f.name]}</div>
+              </td>
+            </tr>
+          ))}
+          <tr className="bui-form-tr">
+            <td className="bui-form-td">{props.buttons}</td>
           </tr>
-        ))}
-        <tr className="bui-form-tr">
-          <td className="bui-form-td">{props.buttons}</td>
-        </tr>
+        </tbody>
       </table>
     </form>
   );

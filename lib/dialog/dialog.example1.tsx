@@ -12,7 +12,7 @@ const DialogExample1 = () => {
         <Button onClick={() => setX(!x)}>click</Button>
         <Dialog
           visible={x}
-          buttons={[<Button>1</Button>, <Button>2</Button>]}
+          buttons={[<Button>点了</Button>, <Button level="important">没有用</Button>]}
           onClose={() => {
             setX(false);
           }}

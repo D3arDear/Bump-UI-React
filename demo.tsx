@@ -26,7 +26,7 @@ const Demo: React.FunctionComponent<Props> = (props) => {
     </Highlight>
   );
   return (
-    <div>
+    <div style={{ margin: "16px" }}>
       <div className="example">{props.children}</div>
       <div>
         <Button onClick={() => setCodeVisible(!codeVisible)}>查看代码</Button>
