@@ -3,6 +3,7 @@
   display: inline-flex;
   position: relative;
   transition: all 0.3s;
+  width: inherit;
   &:hover {
     &::before {
       opacity: 1;
@@ -19,6 +20,10 @@
     }
     .bui-input {
       background: #fafafa;
+    }
+    .bui-input-label {
+      transform: translateY(0px) scale(0.75);
+      color: $primary;
     }
   }
   &::before {
@@ -49,10 +54,18 @@
   .bui-input-label {
     display: inline-flex;
     position: absolute;
-    color: #555;
+    color: #666;
     top: 6px;
-    font-size: 8px;
+    font-size: 14px;
+    transform: translateY(30%) scale(1);
+    transform-origin: left top;
+    bottom: 6px;
+    transition: all 0.3s;
     left: 6px;
+    &.focus {
+      transform: translateY(0px) scale(0.75);
+      color: $primary;
+    }
   }
 
   .bui-input {
@@ -60,7 +73,7 @@
     transition: background 0.3s;
     background: rgb(245, 245, 245);
     border: 1px solid #e1e1e1;
-    padding: 18px 6px 4px 6px;
+    padding: 18px 6px 6px 6px;
     font: inherit;
     line-height: 24px;
     border-radius: 0;
