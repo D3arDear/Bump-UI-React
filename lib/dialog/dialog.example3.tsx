@@ -1,5 +1,6 @@
 import React from "react";
 import { alert, confirm } from "./dialog";
+import Button from "../button/button";
 
 const DialogExample3 = () => {
   return (
@@ -7,8 +8,8 @@ const DialogExample3 = () => {
       <div>
         <h2>Using Dialog pass an alert directive</h2>
         <p> And confirm mode </p>
-        <button onClick={() => alert("1")}>alert</button>
-        <button
+        <Button onClick={() => alert("1")}>alert</Button>
+        <Button
           onClick={() =>
             confirm(
               "1",
@@ -22,7 +23,7 @@ const DialogExample3 = () => {
           }
         >
           confirm
-        </button>
+        </Button>
       </div>
     </div>
   );

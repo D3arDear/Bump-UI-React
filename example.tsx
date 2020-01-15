@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDom from "react-dom";
 import IconDemo from "./lib/icon/icon.demo";
-import ButtonExample from "./lib/button/button.example";
+import ButtonDemo from "./lib/button/button.demo";
 import DialogDemo from "./lib/dialog/dialog.demo";
 import LayoutDemo from "./lib/layout/layout.demo";
 import FromDemo from "./lib/form/form.demo";
@@ -42,7 +42,7 @@ ReactDom.render(
         </Aside>
         <Content className="site-main">
           <Route path="/icon" component={IconDemo} />
-          <Route path="/button" component={ButtonExample} />
+          <Route path="/button" component={ButtonDemo} />
           <Route path="/dialog" component={DialogDemo} />
           <Route path="/layout" component={LayoutDemo} />
           <Route path="/form" component={FromDemo} />

@@ -1,11 +1,12 @@
 import React from "react";
 import { modal } from "./dialog";
+import Button from "../button/button";
 
 const DialogExample4 = () => {
   const openModal = () => {
     const close = modal(
       <h1>
-        hello<button onClick={() => close()}>close</button>
+        hello<Button onClick={() => close()}>close</Button>
       </h1>,
     );
   };
@@ -13,7 +14,7 @@ const DialogExample4 = () => {
     <div>
       <div>
         <h2>modal mode</h2>
-        <button onClick={openModal}>modal</button>
+        <Button onClick={openModal}>modal</Button>
       </div>
     </div>
   );

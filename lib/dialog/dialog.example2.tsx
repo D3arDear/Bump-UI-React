@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Dialog from "./dialog";
+import Button from "../button/button";
 
 const DialogExample2 = () => {
   const [y, setY] = useState(false);
@@ -8,10 +9,10 @@ const DialogExample2 = () => {
       <div>
         <h2>Dialog wont close while click mask</h2>
         <p>closeOnClickMask = false</p>
-        <button onClick={() => setY(!y)}>click</button>
+        <Button onClick={() => setY(!y)}>click</Button>
         <Dialog
           visible={y}
-          buttons={[<button>1</button>, <button>2</button>]}
+          buttons={[<Button>1</Button>, <Button>2</Button>]}
           onClose={() => {
             setY(false);
           }}
