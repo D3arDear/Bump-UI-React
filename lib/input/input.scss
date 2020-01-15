@@ -23,9 +23,10 @@
     }
     .bui-input-label {
       transform: translateY(0px) scale(0.75);
-      color: $primary;
+      color: $primary !important;
     }
   }
+
   &::before {
     content: "";
     position: absolute;
@@ -33,7 +34,8 @@
     bottom: 0;
     opacity: 0;
     background-color: #888;
-    width: 100%;
+    left: 0;
+    right: 0;
     height: 1px;
     transition: all 0.3s;
   }
@@ -64,13 +66,40 @@
     left: 6px;
     &.focus {
       transform: translateY(0px) scale(0.75);
-      color: $primary;
+      color: rgba(0, 0, 0, 0.6);
+    }
+  }
+  &.noLabel {
+    .bui-input {
+      padding: 6px;
     }
   }
 
+  &.standard {
+    &:focus-within {
+      .bui-input {
+        box-shadow: 0 0 3px 0 fade-out($color: $primary, $amount: 1);
+        transition: box-shadow border-color 0.3s;
+        border-color: #e1e1e1;
+        &:focus {
+          border-color: lighten($color: $primary, $amount: 0.5);
+          box-shadow: 0 0 3px 0 fade-out($color: lighten($color: $primary, $amount: 0.5), $amount: 0.3);
+        }
+      }
+    }
+    .bui-input {
+      border-radius: 6px;
+    }
+    &::before {
+      display: none;
+    }
+    &::after {
+      display: none;
+    }
+  }
   .bui-input {
     width: 100%;
-    transition: background 0.3s;
+    transition: all 0.3s;
     background: rgb(245, 245, 245);
     border: 1px solid #e1e1e1;
     padding: 18px 6px 6px 6px;
@@ -79,7 +108,7 @@
     border-radius: 0;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
-    box-shadow: none;
+    box-shadow: 0;
     color: #333;
     &:focus {
       outline: none;

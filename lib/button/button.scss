@@ -1,0 +1,31 @@
+@import "../helper.scss";
+
+.bui-button {
+  padding: 4px 16px;
+  line-height: 22px;
+  transition: all 0.3s;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
+  &-normal {
+    color: #333;
+    border: 1px solid lighten($color: #000000, $amount: 50%);
+    background: #f8f8f8;
+    &:hover,
+    &:focus {
+      border-color: $primary;
+      color: $primary;
+    }
+  }
+  &-important {
+    color: white;
+    border: 1px solid $primary;
+    background: $primary;
+    &:hover,
+    &:focus {
+      background: lighten($color: $primary, $amount: 10%);
+      border-color: lighten($color: $primary, $amount: 10%);
+    }
+  }
+}
