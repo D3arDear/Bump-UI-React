@@ -58,7 +58,6 @@ export default function FormExample1() {
   };
   return (
     <Fragment>
-      {JSON.stringify(errors)}
       <Form
         value={formData}
         fields={fields}
