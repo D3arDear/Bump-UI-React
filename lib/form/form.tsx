@@ -13,6 +13,7 @@ interface Props {
   onSubmit: React.FormEventHandler<HTMLFormElement>;
   onChange: (value: FormValue) => void;
   errors: { [K: string]: string[] };
+  errorsDisplayMode?: "first" | "all";
 }
 
 const Form: React.FunctionComponent<Props> = (props) => {
@@ -27,7 +28,7 @@ const Form: React.FunctionComponent<Props> = (props) => {
   };
   return (
     <form onSubmit={onSubmit} className={classes("bui-form")}>
-      <table>
+      <table className={classes("bui-form-table")}>
         <tbody>
           {props.fields.map((f) => (
             <tr className={classes("bui-form-tr")} key={f.name}>
@@ -38,7 +39,17 @@ const Form: React.FunctionComponent<Props> = (props) => {
                   value={formData[f.name]}
                   onChange={(e) => onInputChange(f.name, e.target.value)}
                 />
-                <div>{props.errors[f.name]}</div>
+                <div className={classes("bui-form-error")}>
+                  {props.errors[f.name] ? (
+                    props.errorsDisplayMode === "first" ? (
+                      props.errors[f.name][0]
+                    ) : (
+                      props.errors[f.name].join()
+                    )
+                  ) : (
+                    <span>&nbsp;</span>
+                  )}
+                </div>
               </td>
             </tr>
           ))}
@@ -49,6 +60,10 @@ const Form: React.FunctionComponent<Props> = (props) => {
       </table>
     </form>
   );
+};
+
+Form.defaultProps = {
+  errorsDisplayMode: "first",
 };
 
 export default Form;

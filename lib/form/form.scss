@@ -1,14 +1,22 @@
 @import "../helper";
 
 .bui-form {
+  &-table {
+    border-collapse: collapse;
+  }
   &-td {
     padding-top: 0;
-    padding-bottom: 32px;
+    padding-bottom: 12px;
   }
   &-tr:last-child &-td {
     padding-bottom: 0;
   }
   &-tr + &-td {
     padding-left: 16px;
+  }
+  &-error {
+    color: rgb(255, 101, 101);
+    margin-top: 4px;
+    font-size: 0.8em;
   }
 }

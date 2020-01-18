@@ -31,12 +31,10 @@ export default function FormExample1() {
       },
     ];
     const errors = Validator(formData, rules);
-    console.log(errors);
     setErrors(errors);
   };
   return (
     <Fragment>
-      {JSON.stringify(formData)}
       <Form
         value={formData}
         fields={fields}
@@ -49,6 +47,7 @@ export default function FormExample1() {
         errors={errors}
         onSubmit={onSubmit}
         onChange={(newValue) => setFromData(newValue)}
+        errorsDisplayMode={"all"}
       />
     </Fragment>
   );
