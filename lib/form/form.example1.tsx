@@ -29,7 +29,7 @@ export default function FormExample1() {
       { key: "username", required: true },
       {
         key: "username",
-        minLength: 8,
+        minLength: 6,
         maxLength: 16,
       },
       {
@@ -56,6 +56,15 @@ export default function FormExample1() {
       setErrors(errors);
     });
   };
+  const errorTranslation = (message: string) => {
+    const map: any = {
+      unique: "Username is taken",
+      required: "Required",
+      minLength: "Too short",
+      maxLength: "Too long",
+    };
+    return map[message];
+  };
   return (
     <Fragment>
       <Form
@@ -68,6 +77,7 @@ export default function FormExample1() {
           </Fragment>
         }
         errors={errors}
+        errorTranslation={errorTranslation}
         onSubmit={onSubmit}
         onChange={(newValue) => setFromData(newValue)}
       />

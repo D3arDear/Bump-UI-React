@@ -14,6 +14,7 @@ interface Props {
   onChange: (value: FormValue) => void;
   errors: { [K: string]: string[] };
   errorsDisplayMode?: "first" | "all";
+  errorTranslation?: (message: string) => string;
 }
 
 const Form: React.FunctionComponent<Props> = (props) => {
@@ -26,6 +27,15 @@ const Form: React.FunctionComponent<Props> = (props) => {
     const newFormValue = { ...formData, [name]: value };
     props.onChange(newFormValue);
   };
+  const errorTranslation = (message: string) => {
+    const map: any = {
+      required: "必填",
+      minLength: "太短",
+      maxLength: "太长",
+    };
+    return (props.errorTranslation && props.errorTranslation(message)) || map[message] || "未知错误";
+  };
+
   return (
     <form onSubmit={onSubmit} className={classes("bui-form")}>
       <table className={classes("bui-form-table")}>
@@ -42,9 +52,9 @@ const Form: React.FunctionComponent<Props> = (props) => {
                 <div className={classes("bui-form-error")}>
                   {props.errors[f.name] ? (
                     props.errorsDisplayMode === "first" ? (
-                      props.errors[f.name][0]
+                      errorTranslation!(props.errors[f.name][0])
                     ) : (
-                      props.errors[f.name].join()
+                      props.errors[f.name].map(errorTranslation!).join()
                     )
                   ) : (
                     <span>&nbsp;</span>
@@ -64,6 +74,14 @@ const Form: React.FunctionComponent<Props> = (props) => {
 
 Form.defaultProps = {
   errorsDisplayMode: "first",
+  errorTranslation: (message: string) => {
+    const map: any = {
+      required: "必填",
+      minLength: "太短",
+      maxLength: "太长",
+    };
+    return map[message] || "未知错误";
+  },
 };
 
 export default Form;
