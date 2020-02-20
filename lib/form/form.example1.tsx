@@ -63,11 +63,14 @@ export default function FormExample1() {
       },
     ];
     Validator(formData, rules, (errors) => {
+      console.log(errors);
       setErrors(errors);
     });
   };
   const errorTranslation = (message: string) => {
-    const map: any = {
+    const map: {
+      [key: string]: string;
+    } = {
       unique: "Username is taken",
       required: "Required",
       minLength: "Too short",

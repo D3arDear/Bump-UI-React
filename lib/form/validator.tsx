@@ -15,12 +15,18 @@ type FormRules = Array<FormRule>;
 
 type OneError = string | Promise<string>;
 
-function isEmpty(value: any) {
+function isEmpty(value: string) {
   return value === undefined || value === null || value === "";
 }
 
-const Validator = (formValue: FormValue, rules: FormRules, callback: (errors: any) => void): void => {
-  let errors: any = {};
+const Validator = (
+  formValue: FormValue,
+  rules: FormRules,
+  callback: (errors: { [key: string]: string[] }) => void,
+): void => {
+  let errors: {
+    [key: string]: OneError[];
+  } = {};
   const addError = (key: string, error: OneError) => {
     if (errors[key] === undefined) {
       errors[key] = [];
@@ -50,27 +56,36 @@ const Validator = (formValue: FormValue, rules: FormRules, callback: (errors: an
     }
   });
   const flattenErrors = flat(
-    Object.keys(errors).map((key) => errors[key].map((promise: Promise<string>) => [key, promise])),
+    Object.keys(errors).map((key) => errors[key].map<[string, OneError]>((error) => [key, error])),
   );
   const newPromises = flattenErrors.map(([key, promiseOrString]) =>
-    (promiseOrString instanceof Promise ? promiseOrString : Promise.reject(promiseOrString)).then(
+    (promiseOrString instanceof Promise ? promiseOrString : Promise.reject(promiseOrString)).then<
+      [string, undefined],
+      [string, string]
+    >(
       () => [key, undefined],
       (reason: string) => [key, reason],
     ),
   );
-  Promise.all(newPromises).then((results: any) => {
-    callback(zip(results.filter((item: Array<string>) => item[1])));
+
+  function hasError(item: [string, undefined] | [string, string]): item is [string, string] {
+    // filter 为什么不能返回普通的 Boolean
+    // filter 只接受一个类型守卫所以
+    return typeof item[1] === "string";
+  }
+  Promise.all(newPromises).then((results) => {
+    callback(zip(results.filter<[string, string]>(hasError)));
   });
 };
 export default Validator;
 
-function flat(array: Array<any>) {
-  const result = [];
+function flat<T>(array: Array<T | T[]>) {
+  const result: T[] = [];
   for (let i = 0; i < array.length; i++) {
     if (array[i] instanceof Array) {
-      result.push(...array[i]);
+      result.push(...(array[i] as T[]));
     } else {
-      result.push(array[i]);
+      result.push(array[i] as T);
     }
   }
   return result;
@@ -78,7 +93,9 @@ function flat(array: Array<any>) {
 
 // hashList = [['username', 'error1], ['username', 'error2'], ['password','error1']]
 function zip(hashList: Array<[string, string]>) {
-  const result: any = {};
+  const result: {
+    [key: string]: [string];
+  } = {};
   hashList.map(([key, value]) => {
     result[key] = result[key] || [];
     result[key].push(value);
