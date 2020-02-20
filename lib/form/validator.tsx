@@ -49,15 +49,17 @@ const Validator = (formValue: FormValue, rules: FormRules, callback: (errors: an
       }
     }
   });
-  const flattenErrors = flat(Object.keys(errors).map((key) => errors[key].map((promise: Promise<string>) => [key, promise])););
+  const flattenErrors = flat(
+    Object.keys(errors).map((key) => errors[key].map((promise: Promise<string>) => [key, promise])),
+  );
   const newPromises = flattenErrors.map(([key, promiseOrString]) =>
     (promiseOrString instanceof Promise ? promiseOrString : Promise.reject(promiseOrString)).then(
-      () =>  [key, undefined],
+      () => [key, undefined],
       (reason: string) => [key, reason],
     ),
   );
-  Promise.all(newPromises).then((results) => {
-    callback(zip(results.filter((item) => item[1])));
+  Promise.all(newPromises).then((results: any) => {
+    callback(zip(results.filter((item: Array<string>) => item[1])));
   });
 };
 export default Validator;
@@ -76,7 +78,7 @@ function flat(array: Array<any>) {
 
 // hashList = [['username', 'error1], ['username', 'error2'], ['password','error1']]
 function zip(hashList: Array<[string, string]>) {
-  const result = {};
+  const result: any = {};
   hashList.map(([key, value]) => {
     result[key] = result[key] || [];
     result[key].push(value);
