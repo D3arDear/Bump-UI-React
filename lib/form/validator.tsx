@@ -5,10 +5,7 @@ interface FormRule {
   minLength?: number;
   maxLength?: number;
   pattern?: RegExp;
-  validator?: {
-    name: string;
-    validate: (value: string) => Promise<void>;
-  };
+  validator?: (value: string) => Promise<string>;
 }
 type FormRules = Array<FormRule>;
 
@@ -16,10 +13,7 @@ type FormRules = Array<FormRule>;
 //   [K: string]: string[];
 // }
 
-interface OneError {
-  message: string;
-  promise?: Promise<any>;
-}
+type OneError = string | Promise<string>;
 
 function isEmpty(value: any) {
   return value === undefined || value === null || value === "";
@@ -37,33 +31,33 @@ const Validator = (formValue: FormValue, rules: FormRules, callback: (errors: an
     const value = formValue[rule.key];
     if (rule.validator) {
       // 自定义校验器
-      const promise = rule.validator.validate(value);
-      addError(rule.key, { message: rule.validator.name, promise });
+      const promise = rule.validator(value);
+      addError(rule.key, promise);
     }
     if (rule.required && isEmpty(value)) {
-      addError(rule.key, { message: "required" });
+      addError(rule.key, "required");
     }
     if (rule.minLength && !isEmpty(value) && value.length < rule.minLength) {
-      addError(rule.key, { message: "minLength" });
+      addError(rule.key, "minLength");
     }
     if (rule.maxLength && !isEmpty(value) && value.length > rule.maxLength) {
-      addError(rule.key, { message: "maxLength" });
+      addError(rule.key, "maxLength");
     }
     if (rule.pattern) {
       if (!rule.pattern.test(value)) {
-        addError(rule.key, { message: "pattern" });
+        addError(rule.key, "pattern");
       }
     }
   });
-  const promiseList = flat(Object.values(errors))
-    .filter((item) => item.promise)
-    .map((item) => item.promise);
-  Promise.all(promiseList).finally(() => {
-    callback(
-      fromEntries(
-        Object.keys(errors).map<[string, string[]]>((key) => [key, errors[key].map((item: OneError) => item.message)]),
-      ),
-    );
+  const flattenErrors = flat(Object.keys(errors).map((key) => errors[key].map((promise: Promise<string>) => [key, promise])););
+  const newPromises = flattenErrors.map(([key, promiseOrString]) =>
+    (promiseOrString instanceof Promise ? promiseOrString : Promise.reject(promiseOrString)).then(
+      () =>  [key, undefined],
+      (reason: string) => [key, reason],
+    ),
+  );
+  Promise.all(newPromises).then((results) => {
+    callback(zip(results.filter((item) => item[1])));
   });
 };
 export default Validator;
@@ -80,10 +74,20 @@ function flat(array: Array<any>) {
   return result;
 }
 
-function fromEntries(array: Array<[string, string[]]>) {
-  const result: { [key: string]: string[] } = {};
-  for (let i = 0; i < array.length; i++) {
-    result[array[i][0]] = array[i][1];
-  }
+// hashList = [['username', 'error1], ['username', 'error2'], ['password','error1']]
+function zip(hashList: Array<[string, string]>) {
+  const result = {};
+  hashList.map(([key, value]) => {
+    result[key] = result[key] || [];
+    result[key].push(value);
+  });
   return result;
 }
+
+// function fromEntries(array: Array<[string, string[]]>) {
+//   const result: { [key: string]: string[] } = {};
+//   for (let i = 0; i < array.length; i++) {
+//     result[array[i][0]] = array[i][1];
+//   }
+//   return result;
+// }
