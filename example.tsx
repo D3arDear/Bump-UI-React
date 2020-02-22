@@ -5,6 +5,7 @@ import ButtonDemo from "./lib/button/button.demo";
 import DialogDemo from "./lib/dialog/dialog.demo";
 import LayoutDemo from "./lib/layout/layout.demo";
 import FromDemo from "./lib/form/form.demo";
+import ScrollDemo from "./lib/scroll/scroll.demo";
 import { HashRouter as Router, NavLink, Route } from "react-router-dom";
 import { Layout, Header, Content, Footer, Aside } from "./lib/layout/layout";
 import "./example.scss";
@@ -38,6 +39,9 @@ ReactDom.render(
             <li>
               <NavLink to="/form">Form</NavLink>
             </li>
+            <li>
+              <NavLink to="/scrollArea">Scroll Area</NavLink>
+            </li>
           </ul>
         </Aside>
         <Content className="site-main">
@@ -46,6 +50,7 @@ ReactDom.render(
           <Route path="/dialog" component={DialogDemo} />
           <Route path="/layout" component={LayoutDemo} />
           <Route path="/form" component={FromDemo} />
+          <Route path="/scrollArea" component={ScrollDemo} />
         </Content>
       </Layout>
       <Footer className="site-footer">&copy; Brenz</Footer>
