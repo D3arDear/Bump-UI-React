@@ -9,7 +9,6 @@
     overflow: auto;
   }
   &-track {
-    border: 1px solid blue;
     width: 10px;
     position: absolute;
     right: 0;
@@ -18,10 +17,11 @@
   }
   &-bar {
     height: 30px;
-    background: #000;
+    background: #808080cc;
     position: absolute;
     top: 0;
-    right: 0;
-    width: 100%;
+    left: 2px;
+    width: 6px;
+    border-radius: 3px;
   }
 }
