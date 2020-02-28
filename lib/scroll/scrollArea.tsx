@@ -12,7 +12,7 @@ import scrollbarWidth from "./scrollbar-width";
 import classes from "../helpers/classes";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
-  onPull?: () => void;
+  afterPulled?: () => void;
 }
 
 // const isTouchDevice: boolean = "ontouchstart" in document.documentElement; // 判断是不是移动设备
@@ -129,7 +129,7 @@ const ScrollArea: React.FunctionComponent<Props> = (props) => {
   const onTouchEnd: TouchEventHandler = (e) => {
     if (pulling.current) {
       setTranslateY(0);
-      props.onPull && props.onPull();
+      props.afterPulled && props.afterPulled();
       pulling.current = false;
     }
   };

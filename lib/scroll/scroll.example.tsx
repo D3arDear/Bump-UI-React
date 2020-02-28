@@ -2,13 +2,13 @@ import React, { Fragment } from "react";
 import ScrollArea from "./scrollArea";
 const ScrollExample: React.FunctionComponent = () => {
   const onPull = () => {
-    console.log("外界知道了用户释放下拉更新了");
+    console.log("用户释放了下拉更新");
   };
   return (
     <div>
       <Fragment>
         <h2>第一个例子</h2>
-        <ScrollArea style={{ height: 300 }} onPull={onPull}>
+        <ScrollArea style={{ height: 300 }} afterPulled={onPull}>
           <p>1</p>
           <p>2</p>
           <p>3</p>
