@@ -4,9 +4,11 @@ import scrollbarWidth from "./scrollbar-width";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {}
 
+// const isTouchDevice: boolean = "ontouchstart" in document.documentElement; // 判断是不是移动设备
 const ScrollArea: React.FunctionComponent<Props> = (props) => {
   const { children, ...rest } = props;
   const [barHeight, setBarHeight] = useState(0);
+  const [barVisible, setbarVisible] = useState(false);
   const [barTop, _setBarTop] = useState(0);
   const setBarTop = (number: number) => {
     const { current } = containerRef;
@@ -21,12 +23,20 @@ const ScrollArea: React.FunctionComponent<Props> = (props) => {
     }
     _setBarTop(number);
   };
+  const timerIdRef = useRef<number | null>(null);
   const onScroll: UIEventHandler = (e) => {
+    setbarVisible(true);
     const { current } = containerRef;
     const scrollHeight = current!.scrollHeight;
     const viewHeight = current!.getBoundingClientRect().height;
     const scrollTop = current!.scrollTop;
     setBarTop((scrollTop * viewHeight) / scrollHeight);
+    if (timerIdRef.current !== null) {
+      window.clearTimeout(timerIdRef.current!);
+    }
+    timerIdRef.current = window.setTimeout(() => {
+      setbarVisible(false);
+    }, 300);
   };
   const draggingRef = useRef(false);
   const firstYRef = useRef(0);
@@ -57,6 +67,9 @@ const ScrollArea: React.FunctionComponent<Props> = (props) => {
 
   const containerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
+    console.log(`barvisible 变为 ${barVisible}`);
+  }, [barVisible]);
+  useEffect(() => {
     const scrollHeight = containerRef.current!.scrollHeight;
     const viewHeight = containerRef.current!.getBoundingClientRect().height;
     setBarHeight((viewHeight * viewHeight) / scrollHeight);
@@ -76,13 +89,15 @@ const ScrollArea: React.FunctionComponent<Props> = (props) => {
       <div className="bui-scroll-inner" style={{ right: -scrollbarWidth() }} ref={containerRef} onScroll={onScroll}>
         {children}
       </div>
-      <div className="bui-scroll-track">
-        <div
-          className="bui-scroll-bar"
-          style={{ height: barHeight, transform: `translateY(${barTop}px)` }}
-          onMouseDown={onMouseDownBar}
-        ></div>
-      </div>
+      {barVisible && (
+        <div className="bui-scroll-track">
+          <div
+            className="bui-scroll-bar"
+            style={{ height: barHeight, transform: `translateY(${barTop}px)` }}
+            onMouseDown={onMouseDownBar}
+          ></div>
+        </div>
+      )}
     </div>
   );
 };
