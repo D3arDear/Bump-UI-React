@@ -32,4 +32,19 @@
     width: 6px;
     border-radius: 3px;
   }
+  &-pulling {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    &-text {
+      font-size: 12px;
+      color: #bbbbbb;
+    }
+    &-icon {
+      font-size: 20px;
+      color: #bbb;
+    }
+  }
 }

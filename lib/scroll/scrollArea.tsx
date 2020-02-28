@@ -11,7 +11,9 @@ import "./scroll.scss";
 import scrollbarWidth from "./scrollbar-width";
 import classes from "../helpers/classes";
 
-interface Props extends HTMLAttributes<HTMLDivElement> {}
+interface Props extends HTMLAttributes<HTMLDivElement> {
+
+}
 
 // const isTouchDevice: boolean = "ontouchstart" in document.documentElement; // 判断是不是移动设备
 const ScrollArea: React.FunctionComponent<Props> = (props) => {
@@ -146,6 +148,13 @@ const ScrollArea: React.FunctionComponent<Props> = (props) => {
           style={{ height: barHeight, transform: `translateY(${barTop}px)` }}
           onMouseDown={onMouseDownBar}
         ></div>
+      </div>
+      <div className="bui-scroll-pulling" style={{ height: translateY }}>
+        {translateY === 150 ? (
+          <span className="bui-scroll-pulling-text">释放即可更新</span>
+        ) : (
+          <span className="bui-scroll-pulling-icon">↓</span>
+        )}
       </div>
     </div>
   );
