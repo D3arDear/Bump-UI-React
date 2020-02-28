@@ -1,6 +1,7 @@
 import React, { HTMLAttributes, UIEventHandler, useState, useEffect, useRef, MouseEventHandler } from "react";
 import "./scroll.scss";
 import scrollbarWidth from "./scrollbar-width";
+import classes from "../helpers/classes";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {}
 
@@ -67,9 +68,6 @@ const ScrollArea: React.FunctionComponent<Props> = (props) => {
 
   const containerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    console.log(`barvisible 变为 ${barVisible}`);
-  }, [barVisible]);
-  useEffect(() => {
     const scrollHeight = containerRef.current!.scrollHeight;
     const viewHeight = containerRef.current!.getBoundingClientRect().height;
     setBarHeight((viewHeight * viewHeight) / scrollHeight);
@@ -89,15 +87,13 @@ const ScrollArea: React.FunctionComponent<Props> = (props) => {
       <div className="bui-scroll-inner" style={{ right: -scrollbarWidth() }} ref={containerRef} onScroll={onScroll}>
         {children}
       </div>
-      {barVisible && (
-        <div className="bui-scroll-track">
-          <div
-            className="bui-scroll-bar"
-            style={{ height: barHeight, transform: `translateY(${barTop}px)` }}
-            onMouseDown={onMouseDownBar}
-          ></div>
-        </div>
-      )}
+      <div className={classes("bui-scroll-track", `${barVisible ? "" : "barHidden"}`)}>
+        <div
+          className="bui-scroll-bar"
+          style={{ height: barHeight, transform: `translateY(${barTop}px)` }}
+          onMouseDown={onMouseDownBar}
+        ></div>
+      </div>
     </div>
   );
 };
