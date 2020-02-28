@@ -1,4 +1,12 @@
-import React, { HTMLAttributes, UIEventHandler, useState, useEffect, useRef, MouseEventHandler } from "react";
+import React, {
+  HTMLAttributes,
+  UIEventHandler,
+  useState,
+  useEffect,
+  useRef,
+  MouseEventHandler,
+  TouchEventHandler,
+} from "react";
 import "./scroll.scss";
 import scrollbarWidth from "./scrollbar-width";
 import classes from "../helpers/classes";
@@ -11,6 +19,15 @@ const ScrollArea: React.FunctionComponent<Props> = (props) => {
   const [barHeight, setBarHeight] = useState(0);
   const [barVisible, setbarVisible] = useState(false);
   const [barTop, _setBarTop] = useState(0);
+  const [translateY, _setTranslateY] = useState(0);
+  const setTranslateY = (y: number) => {
+    if (y < 0) {
+      return;
+    } else if (y > 150) {
+      y = 150;
+    }
+    _setTranslateY(y);
+  };
   const setBarTop = (number: number) => {
     const { current } = containerRef;
     const scrollHeight = current!.scrollHeight;
@@ -82,9 +99,45 @@ const ScrollArea: React.FunctionComponent<Props> = (props) => {
       document.removeEventListener("selectstart", onSelect);
     };
   }, []);
+  const lastYRef = useRef(0);
+  const moveCount = useRef(0);
+  const pulling = useRef(false);
+  const onTouchStart: TouchEventHandler = (e) => {
+    const scrollTop = containerRef.current!.scrollTop;
+    if (scrollTop !== 0) {
+      return;
+    }
+    pulling.current = true;
+    lastYRef.current = e.touches[0].clientY;
+    moveCount.current = 0;
+  };
+  const onTouchMove: TouchEventHandler = (e) => {
+    const deltaY = e.touches[0].clientY - lastYRef.current;
+    moveCount.current += 1;
+    if (moveCount.current === 1 && deltaY < 0) {
+      pulling.current = false;
+      return;
+    }
+    if (!pulling.current) {
+      return;
+    }
+    setTranslateY(translateY + deltaY);
+    lastYRef.current = e.touches[0].clientY;
+  };
+  const onTouchEnd: TouchEventHandler = (e) => {
+    setTranslateY(0);
+  };
   return (
     <div className="bui-scroll" {...rest}>
-      <div className="bui-scroll-inner" style={{ right: -scrollbarWidth() }} ref={containerRef} onScroll={onScroll}>
+      <div
+        className="bui-scroll-inner"
+        style={{ right: -scrollbarWidth(), transform: `translateY(${translateY}px)` }}
+        ref={containerRef}
+        onScroll={onScroll}
+        onTouchMove={onTouchMove}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+      >
         {children}
       </div>
       <div className={classes("bui-scroll-track", `${barVisible ? "" : "barHidden"}`)}>
