@@ -1,0 +1,64 @@
+@import "../helper";
+.bui-citySelect {
+  &-body {
+    overflow: hidden;
+  }
+  &-dialog {
+    position: fixed;
+    top: 0;
+    left: 160px;
+    height: 100%;
+    overflow: auto;
+    background: white;
+    > header {
+      background: $primary;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      font-size: 16px;
+      line-height: 50px;
+      > .icon {
+        position: absolute;
+        left: 0;
+      }
+    }
+  }
+  &-index {
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid rgb(221, 216, 206);
+    > li {
+      width: 20%;
+      text-align: center;
+      padding: 4px 0;
+    }
+  }
+  &-citySection {
+    border-left: 1px solid rgb(237, 235, 229);
+    overflow: hidden;
+    > h4 {
+      border: 1px solid rgb(237, 235, 229);
+      border-left: none;
+      border-bottom: none;
+      float: left;
+      width: 25%;
+      line-height: 80px;
+      text-align: center;
+      font-size: 40px;
+    }
+    > .bui-citySelect-cityName {
+      float: left;
+      width: 25%;
+      font-size: 14px;
+      line-height: 40px;
+      text-align: center;
+      border: 1px solid rgb(237, 235, 229);
+      border-left: none;
+      margin-bottom: -1px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}
