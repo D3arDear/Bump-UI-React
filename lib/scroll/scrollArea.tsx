@@ -17,7 +17,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 
 // const isTouchDevice: boolean = "ontouchstart" in document.documentElement; // 判断是不是移动设备
 const ScrollArea: React.FunctionComponent<Props> = (props) => {
-  const { children, ...rest } = props;
+  const { children, afterPulled, ...rest } = props;
   const [barHeight, setBarHeight] = useState(0);
   const [barVisible, setbarVisible] = useState(false);
   const [barTop, _setBarTop] = useState(0);

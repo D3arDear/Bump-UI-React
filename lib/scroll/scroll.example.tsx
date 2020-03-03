@@ -8,7 +8,7 @@ const ScrollExample: React.FunctionComponent = () => {
     <div>
       <Fragment>
         <h2>第一个例子</h2>
-        <ScrollArea style={{ height: 300 }} afterPulled={onPull}>
+        <ScrollArea style={{ height: "300px" }} afterPulled={onPull}>
           <p>1</p>
           <p>2</p>
           <p>3</p>

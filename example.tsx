@@ -10,59 +10,56 @@ import DialogDemo from "./lib/dialog/dialog.demo";
 import LayoutDemo from "./lib/layout/layout.demo";
 import FromDemo from "./lib/form/form.demo";
 import ScrollDemo from "./lib/scroll/scroll.demo";
-import ScrollArea from "./lib/scroll/scrollArea";
 import CitySelectDemo from "./lib/citySelect/citySelect.demo";
 
 ReactDom.render(
   <Router>
-    <ScrollArea style={{ height: "100vh" }}>
-      <Layout className="site-page">
-        <Header className="site-header">
-          <div className="site-logo">
-            <Icon name="bui-logo"></Icon>
-            <span>BUI</span>
-          </div>
-        </Header>
-        <Layout>
-          <Aside className="site-aside">
-            <h2>组件</h2>
-            <ul>
-              <li>
-                <NavLink to="/icon">Icon</NavLink>
-              </li>
-              <li>
-                <NavLink to="/button">Button</NavLink>
-              </li>
-              <li>
-                <NavLink to="/dialog">Dialog</NavLink>
-              </li>
-              <li>
-                <NavLink to="/layout">Layout</NavLink>
-              </li>
-              <li>
-                <NavLink to="/form">Form</NavLink>
-              </li>
-              <li>
-                <NavLink to="/scrollArea">Scroll Area</NavLink>
-              </li>
-              <li>
-                <NavLink to="/citySelect">City Select</NavLink>
-              </li>
-            </ul>
-          </Aside>
-          <Content className="site-main">
-            <Route path="/icon" component={IconDemo} />
-            <Route path="/button" component={ButtonDemo} />
-            <Route path="/dialog" component={DialogDemo} />
-            <Route path="/layout" component={LayoutDemo} />
-            <Route path="/form" component={FromDemo} />
-            <Route path="/scrollArea" component={ScrollDemo} />
-            <Route path="/citySelect" component={CitySelectDemo} />
-          </Content>
-        </Layout>
-        <Footer className="site-footer">&copy; Brenz</Footer>
+    <Layout className="site-page">
+      <Header className="site-header">
+        <div className="site-logo">
+          <Icon name="bui-logo"></Icon>
+          <span>BUI</span>
+        </div>
+      </Header>
+      <Layout>
+        <Aside className="site-aside">
+          <h2>组件</h2>
+          <ul>
+            <li>
+              <NavLink to="/icon">Icon</NavLink>
+            </li>
+            <li>
+              <NavLink to="/button">Button</NavLink>
+            </li>
+            <li>
+              <NavLink to="/dialog">Dialog</NavLink>
+            </li>
+            <li>
+              <NavLink to="/layout">Layout</NavLink>
+            </li>
+            <li>
+              <NavLink to="/form">Form</NavLink>
+            </li>
+            <li>
+              <NavLink to="/scrollArea">Scroll Area</NavLink>
+            </li>
+            <li>
+              <NavLink to="/citySelect">City Select</NavLink>
+            </li>
+          </ul>
+        </Aside>
+        <Content className="site-main">
+          <Route path="/icon" component={IconDemo} />
+          <Route path="/button" component={ButtonDemo} />
+          <Route path="/dialog" component={DialogDemo} />
+          <Route path="/layout" component={LayoutDemo} />
+          <Route path="/form" component={FromDemo} />
+          <Route path="/scrollArea" component={ScrollDemo} />
+          <Route path="/citySelect" component={CitySelectDemo} />
+        </Content>
       </Layout>
-    </ScrollArea>
+      <Footer className="site-footer">&copy; Brenz</Footer>
+    </Layout>
   </Router>,
   document.querySelector("#root"),
 );

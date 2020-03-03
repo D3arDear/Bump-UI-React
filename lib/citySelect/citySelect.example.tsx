@@ -1,5 +1,6 @@
 import * as React from "react";
 import CitySelect from "./citySelect";
+import Button from "../button/button";
 
 const CitySelectExample: React.FC = () => {
   const cityList = [
@@ -1209,7 +1210,7 @@ const CitySelectExample: React.FC = () => {
             console.log(cityName);
           }}
         >
-          选择城市
+          <Button>选择城市</Button>
         </CitySelect>
       </div>
     </div>
