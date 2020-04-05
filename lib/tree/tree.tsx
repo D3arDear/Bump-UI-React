@@ -1,8 +1,31 @@
 import React from "react";
 import "./tree.scss";
 
-const Tree: React.FunctionComponent = () => {
-  return <div>这里是tree</div>;
+interface SourceDataItem {
+  text: string;
+  value: string;
+  children?: SourceDataItem[];
+}
+interface Props {
+  sourceData: SourceDataItem[];
+}
+
+const Tree: React.FC<Props> = (props) => {
+  return (
+    <div>
+      {props.sourceData.map((item, index) => {
+        return (
+          <div key={index}>
+            {item.text}
+            {item.children &&
+              item.children.map((item2) => {
+                return <div>{item2.text}</div>;
+              })}
+          </div>
+        );
+      })}
+    </div>
+  );
 };
 
 export default Tree;
