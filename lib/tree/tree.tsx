@@ -9,14 +9,18 @@ export interface SourceDataItem {
   value: string;
   children?: SourceDataItem[];
 }
-interface Props {
+
+type A = { selected: string[]; multiple: true };
+type B = { selected: string; multiple: false };
+
+type Props = {
   sourceData: SourceDataItem[];
-  selectedValues: string[];
   onChange: (item: SourceDataItem, bool: boolean) => void;
-}
+} & (A | B);
+
 const renderItem = (
   item: SourceDataItem,
-  selectedValues: string[],
+  selected: string[] | string,
   onChange: (item: SourceDataItem, bool: boolean) => void,
   level = 1,
 ) => {
@@ -31,26 +35,30 @@ const renderItem = (
         <input
           type="checkbox"
           onChange={(e) => onChange(item, e.target.checked)}
-          checked={selectedValues.indexOf(item.value) >= 0}
+          checked={selected.indexOf(item.value) >= 0}
         />
         {item.text}
       </div>
       {item.children?.map((subItem) => {
-        return renderItem(subItem, selectedValues, onChange, level + 1);
+        return renderItem(subItem, selected, onChange, level + 1);
       })}
     </div>
   );
 };
 
 const Tree: React.FC<Props> = (props) => {
-  const { selectedValues, onChange } = props;
-  return (
-    <div>
-      {props.sourceData?.map((item) => {
-        return renderItem(item, selectedValues, onChange);
-      })}
-    </div>
-  );
+  const { selected, onChange, multiple } = props;
+  if (multiple) {
+    return (
+      <div>
+        {props.sourceData?.map((item) => {
+          return renderItem(item, selected, onChange);
+        })}
+      </div>
+    );
+  } else {
+    return <div>未完成</div>;
+  }
 };
 
 export default Tree;

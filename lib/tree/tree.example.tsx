@@ -66,7 +66,7 @@ const TreeExample: React.FC = () => {
         <p>Data display.</p>
         {selectedValues.join("|")}
         <div style={{ width: 200 }}>
-          <Tree sourceData={array} selectedValues={selectedValues} onChange={onChange} />
+          <Tree sourceData={array} selected={selectedValues} onChange={onChange} multiple={true} />
         </div>
       </Fragment>
     </div>
