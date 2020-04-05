@@ -9,20 +9,22 @@ interface SourceDataItem {
 interface Props {
   sourceData: SourceDataItem[];
 }
+const x = (item: SourceDataItem) => {
+  return (
+    <div key={item.value}>
+      {item.text}
+      {item.children?.map((subItem) => {
+        return x(subItem);
+      })}
+    </div>
+  );
+};
 
 const Tree: React.FC<Props> = (props) => {
   return (
     <div>
-      {props.sourceData.map((item, index) => {
-        return (
-          <div key={index}>
-            {item.text}
-            {item.children &&
-              item.children.map((item2) => {
-                return <div>{item2.text}</div>;
-              })}
-          </div>
-        );
+      {props.sourceData?.map((item) => {
+        return x(item);
       })}
     </div>
   );
