@@ -10,55 +10,41 @@ export interface SourceDataItem {
   children?: SourceDataItem[];
 }
 
-type A = { selected: string[]; multiple: true };
-type B = { selected: string; multiple: false };
-
 type Props = {
   sourceData: SourceDataItem[];
   onChange: (item: SourceDataItem, bool: boolean) => void;
-} & (A | B);
-
-const renderItem = (
-  item: SourceDataItem,
-  selected: string[] | string,
-  onChange: (item: SourceDataItem, bool: boolean) => void,
-  level = 1,
-) => {
-  const classes = {
-    ["level-" + level]: true,
-    item: true,
-  };
-
-  return (
-    <div key={item.value} className={sc(classes)}>
-      <div className={sc("text")}>
-        <input
-          type="checkbox"
-          onChange={(e) => onChange(item, e.target.checked)}
-          checked={selected.indexOf(item.value) >= 0}
-        />
-        {item.text}
-      </div>
-      {item.children?.map((subItem) => {
-        return renderItem(subItem, selected, onChange, level + 1);
-      })}
-    </div>
-  );
-};
+} & ({ selected: string[]; multiple: true } | { selected: string; multiple?: false });
 
 const Tree: React.FC<Props> = (props) => {
   const { selected, onChange, multiple } = props;
-  if (multiple) {
+
+  const renderItem = (item: SourceDataItem, level = 1) => {
+    const classes = {
+      ["level-" + level]: true,
+      item: true,
+    };
+    const checked = multiple ? selected.indexOf(item.value) >= 0 : selected === item.value;
+
     return (
-      <div>
-        {props.sourceData?.map((item) => {
-          return renderItem(item, selected, onChange);
+      <div key={item.value} className={sc(classes)}>
+        <div className={sc("text")}>
+          <input type="checkbox" onChange={(e) => onChange(item, e.target.checked)} checked={checked} />
+          {item.text}
+        </div>
+        {item.children?.map((subItem) => {
+          return renderItem(subItem, level + 1);
         })}
       </div>
     );
-  } else {
-    return <div>未完成</div>;
-  }
+  };
+
+  return (
+    <div>
+      {props.sourceData?.map((item) => {
+        return renderItem(item);
+      })}
+    </div>
+  );
 };
 
 export default Tree;

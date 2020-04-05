@@ -34,6 +34,10 @@ const TreeExample: React.FC = () => {
       ],
     },
     {
+      text: "11",
+      value: "11",
+    },
+    {
       text: "2",
       value: "2",
       children: [
@@ -49,6 +53,7 @@ const TreeExample: React.FC = () => {
     },
   ]);
   const [selectedValues, setSelectedValues] = useState(["1.1.1"]);
+  const [selectedValue] = useState("11");
   console.log(setArray);
 
   const onChange = (item: SourceDataItem, bool: boolean) => {
@@ -64,9 +69,8 @@ const TreeExample: React.FC = () => {
       <Fragment>
         <h3>Normal Tree</h3>
         <p>Data display.</p>
-        {selectedValues.join("|")}
         <div style={{ width: 200 }}>
-          <Tree sourceData={array} selected={selectedValues} onChange={onChange} multiple={true} />
+          <Tree sourceData={array} selected={selectedValue} onChange={onChange} multiple={false} />
         </div>
       </Fragment>
     </div>
