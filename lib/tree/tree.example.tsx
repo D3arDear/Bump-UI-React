@@ -52,8 +52,8 @@ const TreeExample: React.FC = () => {
       ],
     },
   ]);
-  const [selectedValues, setSelectedValues] = useState(["1.1.1"]);
-  const [selectedValue] = useState("11");
+  const [selectedValues] = useState(["1.1.1"]);
+  const [selectedValue, setSelectedValue] = useState("11");
   console.log(selectedValues);
   console.log(selectedValue);
 
@@ -65,9 +65,9 @@ const TreeExample: React.FC = () => {
         <div style={{ width: 200 }}>
           <Tree
             sourceData={array}
-            selected={selectedValues}
-            onChange={(selected) => setSelectedValues(selected)}
-            multiple={true}
+            selected={selectedValue}
+            onChange={(value) => setSelectedValue(value)}
+            multiple={false}
           />
         </div>
       </Fragment>

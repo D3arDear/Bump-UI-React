@@ -14,7 +14,7 @@ type Props = {
   sourceData: SourceDataItem[];
 } & (
   | { multiple: true; selected: string[]; onChange: (newSelected: string[]) => void }
-  | { multiple?: false; selected: string; onChange: (newSelected: string) => void }
+  | { multiple: false; selected: string; onChange: (newSelected: string) => void }
 );
 
 const Tree: React.FC<Props> = (props) => {
@@ -32,6 +32,8 @@ const Tree: React.FC<Props> = (props) => {
         } else {
           props.onChange(props.selected.filter((value: string) => value !== item.value));
         }
+      } else {
+        props.onChange(item.value);
       }
     };
 
