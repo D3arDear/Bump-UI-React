@@ -13,6 +13,10 @@ const TreeExample: React.FC = () => {
           children: [
             {
               text: "1.1.1",
+              value: "1.1.1",
+            },
+            {
+              text: "1.1.2",
               value: "1.1.2",
             },
           ],
@@ -49,7 +53,10 @@ const TreeExample: React.FC = () => {
     <div>
       <Fragment>
         <h3>Normal Tree</h3>
-        <Tree sourceData={array} />
+        <p>Data display.</p>
+        <div style={{ width: 200 }}>
+          <Tree sourceData={array} selectedValues={["1.1.1", "1.1.2"]} />
+        </div>
       </Fragment>
     </div>
   );
