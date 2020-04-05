@@ -1,8 +1,8 @@
 import React, { Fragment, useState } from "react";
-import Tree, { SourceDataItem } from "./tree";
+import Tree from "./tree";
 
 const TreeExample: React.FC = () => {
-  const [array, setArray] = useState([
+  const [array] = useState([
     {
       text: "1",
       value: "1",
@@ -54,15 +54,8 @@ const TreeExample: React.FC = () => {
   ]);
   const [selectedValues, setSelectedValues] = useState(["1.1.1"]);
   const [selectedValue] = useState("11");
-  console.log(setArray);
-
-  const onChange = (item: SourceDataItem, bool: boolean) => {
-    if (bool) {
-      setSelectedValues([...selectedValues, item.value]);
-    } else {
-      setSelectedValues(selectedValues.filter((value) => value !== item.value));
-    }
-  };
+  console.log(selectedValues);
+  console.log(selectedValue);
 
   return (
     <div>
@@ -70,7 +63,12 @@ const TreeExample: React.FC = () => {
         <h3>Normal Tree</h3>
         <p>Data display.</p>
         <div style={{ width: 200 }}>
-          <Tree sourceData={array} selected={selectedValue} onChange={onChange} multiple={false} />
+          <Tree
+            sourceData={array}
+            selected={selectedValues}
+            onChange={(selected) => setSelectedValues(selected)}
+            multiple={true}
+          />
         </div>
       </Fragment>
     </div>
