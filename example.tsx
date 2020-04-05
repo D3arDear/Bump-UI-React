@@ -5,6 +5,7 @@ import { Layout, Header, Content, Footer, Aside } from "./lib/layout/layout";
 import "./example.scss";
 import { Icon } from "./lib";
 import IconDemo from "./lib/icon/icon.demo";
+import TreeDemo from "./lib/tree/tree.demo";
 import ButtonDemo from "./lib/button/button.demo";
 import DialogDemo from "./lib/dialog/dialog.demo";
 import LayoutDemo from "./lib/layout/layout.demo";
@@ -46,6 +47,9 @@ ReactDom.render(
             <li>
               <NavLink to="/citySelect">City Select</NavLink>
             </li>
+            <li>
+              <NavLink to="/tree">Tree</NavLink>
+            </li>
           </ul>
         </Aside>
         <Content className="site-main">
@@ -56,9 +60,10 @@ ReactDom.render(
           <Route path="/form" component={FromDemo} />
           <Route path="/scrollArea" component={ScrollDemo} />
           <Route path="/citySelect" component={CitySelectDemo} />
+          <Route path="/tree" component={TreeDemo} />
         </Content>
       </Layout>
-      <Footer className="site-footer">&copy; Brenz</Footer>
+      <Footer className="site-footer">&copy; BrenZ</Footer>
     </Layout>
   </Router>,
   document.querySelector("#root"),
