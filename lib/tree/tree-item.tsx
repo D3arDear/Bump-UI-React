@@ -1,6 +1,6 @@
 import React, { ChangeEventHandler, useState } from "react";
 import { scopeClassMaker } from "../helpers/classes";
-import useUpdate from "lib/hooks/useUpdate";
+import useUpdate from "../hooks/useUpdate";
 const scopedClass = scopeClassMaker("bui-tree");
 const sc = scopedClass;
 
