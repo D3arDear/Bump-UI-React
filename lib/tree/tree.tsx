@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler } from "react";
+import React, { ChangeEventHandler, useState } from "react";
 import "./tree.scss";
 import { scopeClassMaker } from "../helpers/classes";
 const scopedClass = scopeClassMaker("bui-tree");
@@ -37,13 +37,28 @@ const Tree: React.FC<Props> = (props) => {
       }
     };
 
+    const [expanded, setExpanded] = useState(true);
+    const expand = () => {
+      setExpanded(true);
+    };
+    const collapse = () => {
+      setExpanded(false);
+    };
+
     return (
       <div key={item.value} className={sc(classes)}>
         <div className={sc("text")}>
           <input type="checkbox" onChange={onChange} checked={checked} />
           {item.text}
+          {item.children && (
+            <span onSelect={(e) => e.preventDefault()}>
+              {expanded ? <span onClick={collapse}>-</span> : <span onClick={expand}>+</span>}
+            </span>
+          )}
         </div>
-        {item.children?.map((subItem) => renderItem(subItem, level + 1))}
+        <div className={sc({ children: true, collapsed: !expanded })}>
+          {item.children?.map((subItem) => renderItem(subItem, level + 1))}
+        </div>
       </div>
     );
   };

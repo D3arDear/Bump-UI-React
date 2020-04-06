@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import Tree from "./tree";
 
-const TreeExample: React.FC = () => {
+const TreeExample1: React.FC = () => {
   const [array] = useState([
     {
       text: "1",
@@ -52,16 +52,13 @@ const TreeExample: React.FC = () => {
       ],
     },
   ]);
-  const [selectedValues] = useState(["1.1.1"]);
   const [selectedValue, setSelectedValue] = useState("11");
-  console.log(selectedValues);
-  console.log(selectedValue);
 
   return (
     <div>
       <Fragment>
         <h3>Normal Tree</h3>
-        <p>Data display.</p>
+        <p>Data display with single select.</p>
         <div style={{ width: 200 }}>
           <Tree
             sourceData={array}
@@ -75,4 +72,4 @@ const TreeExample: React.FC = () => {
   );
 };
 
-export default TreeExample;
+export default TreeExample1;
