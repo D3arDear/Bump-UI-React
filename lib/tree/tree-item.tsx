@@ -1,5 +1,6 @@
 import React, { ChangeEventHandler, useState } from "react";
 import { scopeClassMaker } from "../helpers/classes";
+import useUpdate from "lib/hooks/useUpdate";
 const scopedClass = scopeClassMaker("bui-tree");
 const sc = scopedClass;
 
@@ -33,13 +34,19 @@ const TreeItem: React.FC<Props> = (props) => {
     }
   };
 
-  const [expanded, setExpanded] = useState(true);
   const expand = () => {
     setExpanded(true);
   };
   const collapse = () => {
     setExpanded(false);
   };
+
+  const [expanded, setExpanded] = useState(true);
+
+  useUpdate(expanded, () => {
+    console.log("expanded 的值变为", expanded);
+  });
+
   return (
     <div key={item.value} className={sc(classes)}>
       <div className={sc("text")}>
