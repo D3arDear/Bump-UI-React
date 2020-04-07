@@ -1,6 +1,7 @@
-import React, { ChangeEventHandler, useState, useRef } from "react";
+import React, { ChangeEventHandler, useRef } from "react";
 import { scopeClassMaker } from "../helpers/classes";
 import useUpdate from "../hooks/useUpdate";
+import useToggle from "../hooks/useToggle";
 const scopedClass = scopeClassMaker("bui-tree");
 const sc = scopedClass;
 
@@ -13,27 +14,16 @@ interface Props {
 
 const TreeItem: React.FC<Props> = (props) => {
   const { level, item, treeProps } = props;
+  const divRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const { expand, collapse, value: expanded } = useToggle(true);
+
   const classes = {
     ["level-" + level]: true,
     item: true,
   };
+
   const checked = treeProps.multiple ? treeProps.selected.indexOf(item.value) >= 0 : treeProps.selected === item.value;
-
-  const collectChildrenValue = (item: SourceDataItem): any => {
-    return flatten(item.children?.map((i) => [i.value, collectChildrenValue(i)]));
-  };
-
-  interface RecursiveArray<T> extends Array<T | RecursiveArray<T>> {}
-
-  function flatten(array?: RecursiveArray<string>): string[] {
-    if (!array) {
-      return [];
-    }
-    return array.reduce<string[]>(
-      (result, current) => result.concat(typeof current === "string" ? current : flatten(current)),
-      [],
-    );
-  }
 
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const childrenValues = collectChildrenValue(item);
@@ -53,17 +43,17 @@ const TreeItem: React.FC<Props> = (props) => {
       }
     }
   };
-
-  const expand = () => {
-    setExpanded(true);
+  const onItemChange = (values: string[]) => {
+    const childrenValues = collectChildrenValue(item);
+    const common = intersect(values, childrenValues);
+    if (common.length !== 0) {
+      props.onItemChange(Array.from(new Set(values.concat(item.value))));
+      inputRef.current!.indeterminate = common.length !== childrenValues.length;
+    } else {
+      props.onItemChange(values.filter((v) => v !== item.value));
+      inputRef.current!.indeterminate = false;
+    }
   };
-  const collapse = () => {
-    setExpanded(false);
-  };
-
-  const [expanded, setExpanded] = useState(true);
-  const divRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
 
   useUpdate(expanded, () => {
     if (!divRef.current) {
@@ -101,33 +91,6 @@ const TreeItem: React.FC<Props> = (props) => {
     }
   });
 
-  function intersect<T>(array1: T[], array2: T[]): T[] {
-    const result: T[] = [];
-    for (let i = 0; i < array1.length; i++) {
-      if (array2.indexOf(array1[i]) >= 0) {
-        result.push(array1[i]);
-      }
-    }
-    return result;
-  }
-
-  const onItemChange = (values: string[]) => {
-    const childrenValues = collectChildrenValue(item);
-    const common = intersect(values, childrenValues);
-    console.log("common:", common);
-    if (common.length !== 0) {
-      props.onItemChange(Array.from(new Set(values.concat(item.value))));
-      if (common.length === childrenValues.length) {
-        inputRef.current!.indeterminate = false;
-      } else {
-        inputRef.current!.indeterminate = true;
-      }
-    } else {
-      props.onItemChange(values.filter((v) => v !== item.value));
-      inputRef.current!.indeterminate = false;
-    }
-  };
-
   return (
     <div key={item.value} className={sc(classes)}>
       <div className={sc("text")}>
@@ -157,3 +120,29 @@ const TreeItem: React.FC<Props> = (props) => {
 };
 
 export default TreeItem;
+
+const collectChildrenValue = (item: SourceDataItem): any => {
+  return flatten(item.children?.map((i) => [i.value, collectChildrenValue(i)]));
+};
+
+interface RecursiveArray<T> extends Array<T | RecursiveArray<T>> {}
+
+function flatten(array?: RecursiveArray<string>): string[] {
+  if (!array) {
+    return [];
+  }
+  return array.reduce<string[]>(
+    (result, current) => result.concat(typeof current === "string" ? current : flatten(current)),
+    [],
+  );
+}
+
+function intersect<T>(array1: T[], array2: T[]): T[] {
+  const result: T[] = [];
+  for (let i = 0; i < array1.length; i++) {
+    if (array2.indexOf(array1[i]) >= 0) {
+      result.push(array1[i]);
+    }
+  }
+  return result;
+}

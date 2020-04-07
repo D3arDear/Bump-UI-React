@@ -11,7 +11,7 @@
   }
   &-children {
     overflow: hidden;
-    transition: height 1s;
+    transition: height 0.3s;
     &-gone {
       height: 0;
     }
