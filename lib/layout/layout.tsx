@@ -5,20 +5,25 @@ import Aside from "./aside";
 const sc = scopeClassMaker("bui-layout");
 
 interface Props extends React.HTMLAttributes<HTMLElement> {
-	children: ReactElement | Array<ReactElement>;
+  children: ReactElement | Array<ReactElement>;
 }
 
 const Layout: React.FunctionComponent<Props> = (props) => {
-	const { className, ...rest } = props;
-	const childrenAsArray = props.children as Array<ReactElement>;
-	const hasAside =
-		"length" in childrenAsArray && childrenAsArray.reduce((result, node) => result || node.type === Aside, false);
+  const { className, ...rest } = props;
+  const childrenAsArray = props.children as Array<ReactElement>;
+  console.log(childrenAsArray);
+  const hasAside =
+    "length" in childrenAsArray &&
+    childrenAsArray.reduce(
+      (result, node) => result || node.type === Aside,
+      false
+    );
 
-	return (
-		<div className={sc({ "": true, hasAside }, { extra: className })} {...rest}>
-			{props.children}
-		</div>
-	);
+  return (
+    <div className={sc({ "": true, hasAside }, { extra: className })} {...rest}>
+      {props.children}
+    </div>
+  );
 };
 
 export default Layout;
