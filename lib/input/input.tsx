@@ -27,11 +27,7 @@ const Input: React.FunctionComponent<Props> = (props) => {
           <span>{label}</span>
         </div>
       )}
-      <input
-        className={classes("bui-input", className)}
-        value={value}
-        {...rest}
-      />
+      <input className={classes("bui-input", className)} value={value} {...rest} />
     </div>
   );
 };

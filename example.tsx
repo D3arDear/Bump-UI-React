@@ -12,6 +12,7 @@ import LayoutDemo from "./lib/layout/layout.demo";
 import FromDemo from "./lib/form/form.demo";
 import ScrollDemo from "./lib/scroll/scroll.demo";
 import CitySelectDemo from "./lib/citySelect/citySelect.demo";
+import InputDemo from "./lib/input/input.demo";
 
 ReactDom.render(
   <Router>
@@ -31,6 +32,9 @@ ReactDom.render(
             </li>
             <li>
               <NavLink to="/button">Button</NavLink>
+            </li>
+            <li>
+              <NavLink to="/input">Input</NavLink>
             </li>
             <li>
               <NavLink to="/dialog">Dialog</NavLink>
@@ -55,6 +59,7 @@ ReactDom.render(
         <Content className="site-main">
           <Route path="/icon" component={IconDemo} />
           <Route path="/button" component={ButtonDemo} />
+          <Route path="/input" component={InputDemo} />
           <Route path="/dialog" component={DialogDemo} />
           <Route path="/layout" component={LayoutDemo} />
           <Route path="/form" component={FromDemo} />
@@ -66,5 +71,5 @@ ReactDom.render(
       <Footer className="site-footer">&copy; BrenZ</Footer>
     </Layout>
   </Router>,
-  document.querySelector("#root"),
+  document.querySelector("#root")
 );

@@ -83,7 +83,8 @@
         border-color: #e1e1e1;
         &:focus {
           border-color: lighten($color: $primary, $amount: 0.5);
-          box-shadow: 0 0 3px 0 fade-out($color: lighten($color: $primary, $amount: 0.5), $amount: 0.3);
+          box-shadow: 0 0 3px 0
+            fade-out($color: lighten($color: $primary, $amount: 0.5), $amount: 0.3);
         }
       }
     }
