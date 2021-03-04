@@ -77,7 +77,7 @@ const Dialog: React.FC<{ onClose: () => void }> = (props) => {
         );
       })}
     </div>,
-    document.body,
+    document.body
   );
 };
 

@@ -10,13 +10,8 @@ const Button: React.FunctionComponent<Props> = (props) => {
   const { className, children, level, ...rest } = props;
   return (
     <button
-      className={classes(
-        "bui-button root-button",
-        `bui-button-${level}`,
-        className
-      )}
-      {...rest}
-    >
+      className={classes("bui-button root-button", `bui-button-${level}`, className)}
+      {...rest}>
       {children}
     </button>
   );
