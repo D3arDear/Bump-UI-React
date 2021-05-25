@@ -20,8 +20,7 @@ const Input: React.FunctionComponent<Props> = (props) => {
         `${noLabel()}`,
         `${standout()}`,
         className
-      )}
-    >
+      )}>
       {label && (
         <div className={classes(`bui-input-label ${onFocus()}`)}>
           <span>{label}</span>

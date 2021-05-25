@@ -18,10 +18,9 @@ const DialogExample3 = () => {
               },
               () => {
                 console.log("你点击了no");
-              },
+              }
             )
-          }
-        >
+          }>
           confirm
         </Button>
       </div>

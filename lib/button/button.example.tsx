@@ -10,7 +10,7 @@ const ButtonExample: React.FunctionComponent = () => {
       </Fragment>
       <Fragment>
         <h3>Normal Button</h3>
-        <Button level="important">Important Button</Button>
+        <Button level="primary">Primary Button</Button>
       </Fragment>
     </div>
   );

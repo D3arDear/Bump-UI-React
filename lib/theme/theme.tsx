@@ -1,0 +1,21 @@
+export const theme = {
+  colors: {
+    background: '"#eef1f3"',
+    default: '"#eef1f3"',
+    primary: "#ff9e5d",
+    secondary: "#ffd6f3",
+    danger: "#f56c6c",
+    info: "#909399",
+    success: "#c5e063",
+    warning: "#e6803c",
+    disabled: "#ddd",
+    checked: "#ff9e5d",
+    pager: "#e6803c",
+    error: "#f85555",
+    black: "#292929",
+    black0: "#292929",
+    black1: "#363636",
+    black2: "#464646",
+    white: "#eee",
+  },
+};

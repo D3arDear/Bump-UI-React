@@ -12,12 +12,11 @@ const DialogExample1 = () => {
         <Button onClick={() => setX(!x)}>click</Button>
         <Dialog
           visible={x}
-          buttons={[<Button>点了</Button>, <Button level="important">没有用</Button>]}
+          buttons={[<Button>点了</Button>, <Button level="primary">没有用</Button>]}
           onClose={() => {
             setX(false);
           }}
-          closeOnClickMask={true}
-        >
+          closeOnClickMask={true}>
           <strong>hi</strong>
         </Dialog>
       </div>

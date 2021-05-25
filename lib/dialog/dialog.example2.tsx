@@ -12,11 +12,10 @@ const DialogExample2 = () => {
         <Button onClick={() => setY(!y)}>click</Button>
         <Dialog
           visible={y}
-          buttons={[<Button>点了</Button>, <Button level="important">没有用</Button>]}
+          buttons={[<Button>点了</Button>, <Button level="primary">没有用</Button>]}
           onClose={() => {
             setY(false);
-          }}
-        >
+          }}>
           <strong>hi</strong>
         </Dialog>
       </div>

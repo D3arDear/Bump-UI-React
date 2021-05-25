@@ -7,7 +7,7 @@ const DialogExample4 = () => {
     const close = modal(
       <h1>
         hello<Button onClick={() => close()}>close</Button>
-      </h1>,
+      </h1>
     );
   };
   return (

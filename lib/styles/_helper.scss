@@ -1,0 +1,137 @@
+// 凹凸阴影函数和mixin
+@function background2shadowL($color) {
+  @if lightness($color) >= 50 {
+    @return rgba(white, 70%);
+  } @else {
+    @return rgba(lighten($color, 45%), 6%);
+  }
+}
+@function background2shadowD($color) {
+  @if lightness($color) >= 50 {
+    @return rgba(darken($color, 35%), 50%);
+  } @else {
+    @return rgba(black, 70%);
+  }
+}
+
+@function surfaceShadow-concave-generator($angle, $color) {
+  @return linear-gradient($angle, darken($color, 6%), lighten($color, 8%));
+}
+
+@function surfaceShadow-convex-generator($angle, $color) {
+  @return linear-gradient($angle, lighten($color, 20%), darken($color, 12%));
+}
+
+@function directionToAngle($direction) {
+  @if $direction == topLeft {
+    @return 145deg;
+  } @else if $direction == topRight {
+    @return 225deg;
+  } @else if $direction == bottomLeft {
+    @return 45deg;
+  } @else if $direction == bottomRight {
+    @return 315deg;
+  }
+}
+
+@function reverseDirection($direction) {
+  @if $direction == topLeft {
+    @return bottomRight;
+  } @else if $direction == topRight {
+    @return bottomLeft;
+  } @else if $direction == bottomLeft {
+    @return topRight;
+  } @else if $direction == bottomRight {
+    @return topLeft;
+  }
+}
+
+@function shadow-light($direction, $color, $blur) {
+  @if $direction == topLeft {
+    @return (-$blur / 2) (-$blur / 2) $blur background2shadowL($color);
+  } @else if $direction == topRight {
+    @return ($blur / 2) (-$blur / 2) $blur background2shadowL($color);
+  } @else if $direction == bottomLeft {
+    @return (-$blur / 2) ($blur / 2) $blur background2shadowL($color);
+  } @else if $direction == bottomRight {
+    @return ($blur / 2) ($blur / 2) $blur background2shadowL($color);
+  }
+}
+
+@function shadow-dark($direction, $color, $blur) {
+  @if $direction == topLeft {
+    @return ($blur / 2) ($blur / 2) $blur background2shadowD($color);
+  } @else if $direction == topRight {
+    @return (-$blur / 2) ($blur / 2) $blur background2shadowD($color);
+  } @else if $direction == bottomLeft {
+    @return ($blur / 2) (-$blur / 2) $blur background2shadowD($color);
+  } @else if $direction == bottomRight {
+    @return (-$blur / 2) (-$blur / 2) $blur background2shadowD($color);
+  }
+}
+
+@function shadowD-oneWay($side, $color, $blur, $dol: dark) {
+  $blurCoef: 1.6;
+  @if $dol == light {
+    @if $side == bottom {
+      @return 0 ($blurCoef * $blur) ($blur) (-$blur) background2shadowL($color);
+    } @else if $side == top {
+      @return 0 ((-$blurCoef) * $blur) ($blur) (-$blur) background2shadowL($color);
+    } @else if $side == right {
+      @return ($blurCoef * $blur) 0 ($blur) (-$blur) background2shadowL($color);
+    } @else if $side == left {
+      @return ((-$blurCoef) * $blur) 0 ($blur) (-$blur) background2shadowL($color);
+    }
+  } @else if $dol == dark {
+    @if $side == bottom {
+      @return 0 ($blurCoef * $blur) $blur (-$blur) background2shadowD($color);
+    } @else if $side == top {
+      @return 0 ((-$blurCoef) * $blur) $blur (-$blur) background2shadowD($color);
+    } @else if $side == right {
+      @return ($blurCoef * $blur) 0 $blur (-$blur) background2shadowD($color);
+    } @else if $side == left {
+      @return ((-$blurCoef) * $blur) 0 $blur (-$blur) background2shadowD($color);
+    }
+  }
+}
+
+@function shadow-generator($direction, $color, $blur, $inset: false) {
+  @if $inset {
+    @return shadow-light($direction, $color, $blur) inset,
+      shadow-dark($direction, $color, $blur) inset;
+  } @else {
+    @return shadow-light($direction, $color, $blur), shadow-dark($direction, $color, $blur);
+  }
+}
+
+@function surface-generator($direction, $color, $type) {
+  @if $type == concave {
+    @return surfaceShadow-concave-generator(directionToAngle($direction), $color);
+  } @else if $type == convex {
+    @return surfaceShadow-convex-generator(directionToAngle($direction), $color);
+  }
+}
+
+@function surface-shadow-generator($direction, $color, $blur) {
+  @return shadow-generator(reverseDirection($direction), $color, $blur, true);
+}
+
+@mixin shadow($direction, $color, $blur, $inset: false) {
+  box-shadow: shadow-generator($direction, $color, $blur, $inset);
+}
+
+@mixin surface($direction, $color, $type) {
+  background-image: surface-generator($direction, $color, $type);
+}
+
+// 对比度函数
+
+@function ContrastText($originColor) {
+  @if (((lightness($originColor) >= 60%)) and saturation($originColor) <= 70%) or
+    (lightness(grayscale($originColor)) >= 85%)
+  {
+    @return #444;
+  } @else {
+    @return #eee;
+  }
+}

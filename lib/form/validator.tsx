@@ -22,7 +22,7 @@ function isEmpty(value: string) {
 const Validator = (
   formValue: FormValue,
   rules: FormRules,
-  callback: (errors: { [key: string]: string[] }) => void,
+  callback: (errors: { [key: string]: string[] }) => void
 ): void => {
   let errors: {
     [key: string]: OneError[];
@@ -56,7 +56,7 @@ const Validator = (
     }
   });
   const flattenErrors = flat(
-    Object.keys(errors).map((key) => errors[key].map<[string, OneError]>((error) => [key, error])),
+    Object.keys(errors).map((key) => errors[key].map<[string, OneError]>((error) => [key, error]))
   );
   const newPromises = flattenErrors.map(([key, promiseOrString]) =>
     (promiseOrString instanceof Promise ? promiseOrString : Promise.reject(promiseOrString)).then<
@@ -64,8 +64,8 @@ const Validator = (
       [string, string]
     >(
       () => [key, undefined],
-      (reason: string) => [key, reason],
-    ),
+      (reason: string) => [key, reason]
+    )
   );
 
   function hasError(item: [string, undefined] | [string, string]): item is [string, string] {

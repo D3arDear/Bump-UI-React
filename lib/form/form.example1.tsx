@@ -26,7 +26,11 @@ export default function FormExample1() {
   const [errors, setErrors] = useState({});
   const validator = (username: string) => {
     return new Promise<string>((resolve, reject) => {
-      checkUserName(username, resolve, () => reject("unique"));
+      checkUserName(
+        username,
+        () => resolve(""),
+        () => reject("unique")
+      );
     });
   };
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -85,8 +89,8 @@ export default function FormExample1() {
         fields={fields}
         buttons={
           <Fragment>
-            <Button type="submit">提交</Button>
-            <Button level="important">返回</Button>
+            <Button htmlType="submit">提交</Button>
+            <Button level="primary">返回</Button>
           </Fragment>
         }
         errors={errors}

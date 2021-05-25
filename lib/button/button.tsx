@@ -1,24 +1,35 @@
-import React, { ButtonHTMLAttributes } from "react";
+import React from "react";
 import classes from "../helpers/classes";
 import "./button.scss";
 
-interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  level?: "important" | "danger" | "normal";
+interface ButtonProps {
+  level?: "primary" | "danger" | "normal" | "warning";
+  icon?: string;
+  position?: "left" | "right";
+  size?: "small" | "medium" | "large";
+  textButton?: boolean;
+  htmlType?: "button" | "submit" | "reset";
+  loading?: boolean;
+  onClick?: React.MouseEventHandler;
+  disabled?: boolean;
+  onMouseEnter?: React.MouseEventHandler;
+  onMouseLeave?: React.MouseEventHandler;
+  onFocus?: React.FocusEventHandler;
+  onBlur?: React.FocusEventHandler;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
-const Button: React.FunctionComponent<Props> = (props) => {
-  const { className, children, level, ...rest } = props;
+const Button: React.FunctionComponent<ButtonProps> = (props) => {
+  const { className, children, level, disabled, htmlType, ...rest } = props;
   return (
     <button
       className={classes("bui-button root-button", `bui-button-${level}`, className)}
+      type={htmlType}
       {...rest}>
-      {children}
+      <span>{children}</span>
     </button>
   );
-};
-
-Button.defaultProps = {
-  level: "normal",
 };
 
 export default Button;
